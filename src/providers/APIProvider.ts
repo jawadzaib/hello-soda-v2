@@ -14,7 +14,7 @@ class APIProvider implements IUser, IAuth, ISocialApp {
   async addUser(user: User) {
     return await this.http.post('/users/create', user);
   }
-  
+
   async getUsers() {
     return await this.http.get('/users');
   }
@@ -31,7 +31,7 @@ class APIProvider implements IUser, IAuth, ISocialApp {
     return await this.http.get('/users/socialAccounts');
   }
   async login(uname: string, pass: string) {
-    return await this.http.post('/auth/login', {username: uname, password: pass}, false);
+    return await this.http.post('/auth/login', { username: uname, password: pass }, false);
   }
   async logout() {
     return await this.http.post('/auth/logout', {});

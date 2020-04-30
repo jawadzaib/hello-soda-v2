@@ -1,7 +1,5 @@
-
 interface ISocialApp {
-    getSocialAccounts(): any;
+  getSocialAccounts(): any;
 }
-  
+
 export default ISocialApp;
-  

@@ -3,11 +3,11 @@ import DBProvider from '../providers/DBProvider';
 
 class SDKManager {
   static dataProvider: any = new APIProvider();
-  static Type = {API: 0, Database: 1};
+  static Type = { API: 0, Database: 1 };
 
   static useProvider(providerName: number) {
     let provider = null;
-    switch(providerName) {
+    switch (providerName) {
       case SDKManager.Type.API:
         provider = new APIProvider();
         break;
@@ -17,7 +17,7 @@ class SDKManager {
       default:
         provider = SDKManager.dataProvider;
     }
-    return SDKManager.dataProvider = provider;
+    return (SDKManager.dataProvider = provider);
   }
 }
 

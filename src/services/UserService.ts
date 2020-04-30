@@ -4,13 +4,13 @@ import SDKManager from '../core/SDKManager';
 class UserService {
   static async addUser(user: User) {
     const response = await SDKManager.dataProvider.addUser(user);
-    return (response) ? response.status : false;
+    return response ? response.status : false;
   }
 
   static async getUsers() {
     const response = await SDKManager.dataProvider.getUsers();
     const users: User[] = [];
-    if(response.status) {
+    if (response.status) {
       return response.data;
     }
     return users;
@@ -18,7 +18,7 @@ class UserService {
 
   static async getUser(id: number) {
     const response = await SDKManager.dataProvider.getUser(id);
-    if(response.status) {
+    if (response.status) {
       return response.data as User;
     }
     return null;
@@ -26,7 +26,7 @@ class UserService {
 
   static async removeUser(id: number) {
     const response = await SDKManager.dataProvider.removeUser(id);
-    return (response) ? response.status : false;
+    return response ? response.status : false;
   }
 }
 
