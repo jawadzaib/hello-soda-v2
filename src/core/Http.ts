@@ -23,7 +23,7 @@ class Http {
       options.headers.Authorization = AuthService.getToken();
     }
     try {
-      const response = await this.requestInstance.get(this.apiUrl + endPoint, options);
+      const response = await this.requestInstance.get(endPoint, options);
       return { status: true, data: response };
     } catch (e) {
       return { status: false };
@@ -37,7 +37,7 @@ class Http {
     }
 
     try {
-      const response = await this.requestInstance.post(this.apiUrl + endPoint, data, options);
+      const response = await this.requestInstance.post(endPoint, data, options);
       return { status: true, data: response };
     } catch (e) {
       return { status: false };
