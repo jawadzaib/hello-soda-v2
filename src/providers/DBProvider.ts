@@ -8,7 +8,7 @@ class DBProvider implements IUserProvider {
         // connect using mongoDB Client instance
     }
     addUser(user: User) {
-        console.log("Database Method not implemented.");
+        throw new Error("Method not implemented.");
     }    
     
     getUsers() {
