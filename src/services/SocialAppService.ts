@@ -1,8 +1,9 @@
+import SDKManager from "../core/SDKManager";
 
 class SocialAppService {
-  totalScore: number;
-  constructor() {
-    this.totalScore = 0;
+  static async getSocialAccounts() {
+    const response = await SDKManager.dataProvider.getSocialAccounts();
+    return (response) ? response.status : false;
   }
 }
 

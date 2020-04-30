@@ -3,11 +3,12 @@ import SDKManager from '../core/SDKManager';
 
 class UserService {
   static async addUser(user: User) {
-    SDKManager.apiAdapter.postData('/users/create', user);
+    const response = await SDKManager.dataProvider.addUser(user);
+    return (response) ? response.status : false;
   }
 
   static async getUsers() {
-    const response = await SDKManager.apiAdapter.getData('/users');
+    const response = await SDKManager.dataProvider.getUsers();
     const users: User[] = [];
     if(response.status) {
       return response.data;
@@ -16,7 +17,7 @@ class UserService {
   }
 
   static async getUser(id: number) {
-    const response = await SDKManager.apiAdapter.getData('/users/' + id);
+    const response = await SDKManager.dataProvider.getUser(id);
     if(response.status) {
       return response.data as User;
     }
@@ -24,11 +25,8 @@ class UserService {
   }
 
   static async removeUser(id: number) {
-    console.log(id);
-  }
-
-  static async getSocialAccounts() {
-    return null;
+    const response = await SDKManager.dataProvider.removeUser(id);
+    return (response) ? response.status : false;
   }
 }
 

@@ -16,19 +16,19 @@
     "postversion": "git push && git push --tags"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@SOFTOO-Pvt-Ltd"
+    "registry": "https://npm.pkg.github.com/@jawadzaib"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SOFTOO-Pvt-Ltd/hello-soda-sdk.git"
+    "url": "git+https://github.com/jawadzaib/hello-soda-v2"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SOFTOO-Pvt-Ltd/hello-soda-sdk/issues"
+    "url": "https://github.com/jawadzaib/hello-soda-v2/issues"
   },
-  "homepage": "https://github.com/SOFTOO-Pvt-Ltd/hello-soda-sdk#readme",
+  "homepage": "https://github.com/jawadzaib/hello-soda-v2#readme",
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "jest": "^25.4.0",

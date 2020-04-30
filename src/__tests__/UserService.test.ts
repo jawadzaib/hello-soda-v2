@@ -1,9 +1,7 @@
 import { UserService } from './../index';
+import SDKManager from '../core/SDKManager';
 
 test('Get User Service', () => {
-  expect(UserService.getUser(32)).toStrictEqual({ firstName: 'test', lastName: 'test' });
-});
-
-test('Add User Service', () => {
-  expect(UserService.addUser({ firstName: 'test', lastName: 'last name' })).toStrictEqual(undefined);
+  SDKManager.useProvider(SDKManager.Type.Database);
+  UserService.addUser({firstName: "test"});
 });
