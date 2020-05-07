@@ -1,4 +1,3 @@
-
 import SDKManager from './core/SDKManager';
 import User from './models/User';
 import UserService from './services/UserService';

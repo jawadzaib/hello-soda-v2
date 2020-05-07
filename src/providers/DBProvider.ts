@@ -27,15 +27,15 @@ class DBProvider implements IUser, IAuth, ISocialApp {
   getSocialAccounts() {
     throw new Error('Method not implemented.');
   }
-  
+
   login(username: string, password: string) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   logout() {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   register(user: User) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }
 

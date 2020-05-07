@@ -1,6 +1,5 @@
-
 interface IToken {
-    getToken(): any;
+  getToken(): any;
 }
 
 export default IToken;

@@ -11,7 +11,7 @@ class FacebookService {
     // });
   }
 
-  static async getProfile(token: string, fields: ["id", "name"]) {
+  static async getProfile(token: string, fields: ['id', 'name']) {
     // return FB.api('me', {fields: fields, access_token: token});
   }
 }
