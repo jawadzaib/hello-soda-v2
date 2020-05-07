@@ -3,7 +3,7 @@ import { Facebook, SDKManager } from './../index';
 test('Get User Service', done => {
   SDKManager.useProvider(SDKManager.Type.API);
   Facebook.connect({appId: "613018332634917", appSecret: "a8fa8c13d4857a1713e80202ee676c30"});
-  Facebook.getLoginURL().then(response => {
+  Facebook.getLoginURL("http://www.google.com").then(response => {
     console.log(response);
     done();
   })

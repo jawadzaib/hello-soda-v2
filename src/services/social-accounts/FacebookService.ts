@@ -1,4 +1,4 @@
-var { FB } = require('fb');
+const { FB } = require('fb');
 
 class FacebookService {
   static async connect(options: any) {

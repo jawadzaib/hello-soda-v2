@@ -3,12 +3,12 @@ import IAuth from '../interfaces/IAuth';
 import ISocialApp from '../interfaces/ISocialApp';
 import User from '../models/User';
 import Http from '../core/Http';
-import SDKManager from '../core/SDKManager';
+import { API_URL } from '../constants';
 
 class APIProvider implements IUser, IAuth, ISocialApp {
   http: Http;
   constructor() {
-    this.http = new Http(SDKManager.API_URL);
+    this.http = new Http(API_URL);
   }
 
   async addUser(user: User) {
