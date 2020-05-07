@@ -1,18 +1,18 @@
-const { FB } = require('fb');
+// import FB from 'fb'
 
 class FacebookService {
   static async connect(options: any) {
-    FB.options(options);
+    // FB.options(options);
   }
   static async getLoginURL(redirectUrl: string) {
-    return FB.getLoginUrl({
-        scope: 'email,user_likes',
-        redirect_uri: redirectUrl
-    });
+    // return FB.getLoginUrl({
+    //     scope: 'email,user_likes',
+    //     redirect_uri: redirectUrl
+    // });
   }
 
   static async getProfile(token: string, fields: ["id", "name"]) {
-    return FB.api('me', {fields: fields, access_token: token});
+    // return FB.api('me', {fields: fields, access_token: token});
   }
 }
 
