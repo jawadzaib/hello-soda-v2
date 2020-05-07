@@ -1,7 +1,9 @@
-import IUserProvider from './../interfaces/IUser';
+import IUser from './../interfaces/IUser';
+import IAuth from './../interfaces/IAuth';
+import ISocialApp from './../interfaces/ISocialApp';
 import User from '../models/User';
 
-class DBProvider implements IUserProvider {
+class DBProvider implements IUser, IAuth, ISocialApp {
   constructor() {
     // get instance of mongoDB Client
     // connect using mongoDB Client instance
@@ -24,6 +26,16 @@ class DBProvider implements IUserProvider {
 
   getSocialAccounts() {
     throw new Error('Method not implemented.');
+  }
+  
+  login(username: string, password: string) {
+    throw new Error("Method not implemented.");
+  }
+  logout() {
+    throw new Error("Method not implemented.");
+  }
+  register(user: User) {
+    throw new Error("Method not implemented.");
   }
 }
 

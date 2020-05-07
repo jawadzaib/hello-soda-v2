@@ -1,3 +1,5 @@
+import SocialAccount from "./SocialAccount";
+
 interface User {
   firstName: string,
   lastName : string,
@@ -8,10 +10,7 @@ interface User {
   country  : string,
   phone    : string,
   email    : string,
-  productId: number,
-  campaignId: number,
-  shippingId: number,
-  notes    : string
+  accounts: SocialAccount[];
 }
 
 export default User;

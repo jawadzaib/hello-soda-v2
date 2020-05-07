@@ -42,7 +42,9 @@
     "lib/**/*"
   ],
   "dependencies": {
+    "@types/fb": "0.0.28",
     "axios": "^0.19.2",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "fb": "^2.0.0"
   }
 }
