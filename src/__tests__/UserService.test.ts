@@ -1,5 +1,5 @@
 import { Facebook, SDKManager, Auth, Users } from './../index';
-import ServiceUser from "../models/ServiceUser";
+import ServiceUser from '../models/ServiceUser';
 
 test('Get User Service', (done) => {
   SDKManager.useProvider(SDKManager.Type.API);
@@ -7,17 +7,17 @@ test('Get User Service', (done) => {
   //   console.log(response.getFirstName())
   // })
   const user = new ServiceUser({
-    "firstName": "firstName",
-    "lastName" : "lastName",
-    "address1" : "shippingAddress1",
-    "city"     : "shippingCity",
-    "state"    : "AL",
-    "zip"      : "1234",
-    "country"  : "US",
-    "phone"    : "000000000",
-    "email"    : "abdulsalam1@gmail.com"
+    firstName: 'firstName',
+    lastName: 'lastName',
+    address1: 'shippingAddress1',
+    city: 'shippingCity',
+    state: 'AL',
+    zip: '1234',
+    country: 'US',
+    phone: '000000000',
+    email: 'abdulsalam1@gmail.com',
   });
-  Users.addUser(user).then(response => {
+  Users.addUser(user).then((response) => {
     // console.log(response);
     done();
   });

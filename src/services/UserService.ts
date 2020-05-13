@@ -10,7 +10,7 @@ class UserService {
       city: user.getCity(),
       zip: user.getZip(),
       phone: user.getPhone(),
-      email: user.getEmail()
+      email: user.getEmail(),
     });
     return response ? response.status : false;
   }
@@ -26,7 +26,7 @@ class UserService {
 
   static async getUser(id: number) {
     const response = await SDKManager.dataProvider.getUser(id);
-    if(response && response.status) {
+    if (response && response.status) {
       return new ServiceUser(response);
     }
     return null;

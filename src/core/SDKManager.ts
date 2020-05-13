@@ -5,7 +5,7 @@ import { API_URL } from './../constants';
 class SDKManager {
   static dataProvider: any = new APIProvider();
   static Type = { API: 0, Database: 1 };
-  
+
   static useProvider(providerName: number) {
     let provider = null;
     switch (providerName) {
