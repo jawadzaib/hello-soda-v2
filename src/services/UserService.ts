@@ -3,7 +3,7 @@ import SDKManager from '../core/SDKManager';
 import ServiceUser from '../models/ServiceUser';
 
 class UserService {
-  static async addUser(user: User) {
+  static async addUser(user: ServiceUser) {
     const response = await SDKManager.dataProvider.addUser({
       firstName: user.getFirstName(),
       lastName: user.getLastName(),
@@ -17,7 +17,7 @@ class UserService {
 
   static async getUsers() {
     const response = await SDKManager.dataProvider.getUsers();
-    const users: User[] = [];
+    const users: ServiceUser[] = [];
     if (response.status) {
       return response.data;
     }
