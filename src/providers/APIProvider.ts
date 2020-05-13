@@ -20,14 +20,7 @@ class APIProvider implements IUser, IAuth, ISocialApp {
   }
 
   async getUser(id: number) {
-    // return await this.http.get('/users/' + id);
-    return new Promise(resolve => {
-      resolve({
-        firstName: "testing",
-        lastName: "last name 1",
-        address1: "address"
-      })
-    })
+    return await this.http.get('/users/' + id);
   }
 
   async removeUser(id: number) {

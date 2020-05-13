@@ -1,5 +1,6 @@
 import SDKManager from '../core/SDKManager';
 import User from '../models/User';
+import ServiceUser from '../models/ServiceUser';
 
 class AuthService {
   static getToken() {
@@ -39,7 +40,9 @@ class AuthService {
   static async getProfile() {
     try {
       const response = await SDKManager.dataProvider.getProfile();
-      return response ? response.data as User : false;
+      if(response && response.status) {
+        return new ServiceUser(response);
+      }
     } catch (error) {
       throw error;
     }

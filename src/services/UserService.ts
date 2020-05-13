@@ -26,9 +26,9 @@ class UserService {
 
   static async getUser(id: number) {
     const response = await SDKManager.dataProvider.getUser(id);
-    console.log(response)
-    const user = new ServiceUser(response);
-     return user;
+    if(response && response.status) {
+      return new ServiceUser(response);
+    }
     return null;
   }
 
