@@ -12,10 +12,10 @@ class UserService {
         zip: user.getZip(),
         phone: user.getPhone(),
         email: user.getEmail(),
-        password: user.getPassword()
+        password: user.getPassword(),
       });
       return response;
-    } catch(error) {
+    } catch (error) {
       throw error;
     }
   }
@@ -31,7 +31,7 @@ class UserService {
 
   static async getUser(id: number) {
     const response = await SDKManager.dataProvider.getUser(id);
-    return (response) ? new ServiceUser(response) : false;
+    return response ? new ServiceUser(response) : false;
   }
 
   static async removeUser(id: number) {

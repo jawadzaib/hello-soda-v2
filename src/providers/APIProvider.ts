@@ -9,7 +9,7 @@ import { config } from 'dotenv';
 class APIProvider implements IUser, IAuth, ISocialApp {
   http: Http;
   constructor() {
-    this.http = new Http((process.env.API_URL) ? process.env.API_URL : API_URL);
+    this.http = new Http(process.env.API_URL ? process.env.API_URL : API_URL);
   }
 
   async addUser(user: User) {

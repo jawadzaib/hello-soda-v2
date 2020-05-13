@@ -40,7 +40,7 @@ class AuthService {
   static async getProfile() {
     try {
       const response = await SDKManager.dataProvider.getProfile();
-      return (response) ? new ServiceUser(response) : false;
+      return response ? new ServiceUser(response) : false;
     } catch (error) {
       throw error;
     }
