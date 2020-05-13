@@ -10,8 +10,10 @@ class ServiceUser extends User {
   protected country: string;
   protected phone: string;
   protected email: string;
+  protected password: string;
   protected jobs: Job[];
   protected accounts: SocialAccount[];
+  protected reports: any[];
   // constructor() {
   //     super();
   //     this.address1 = "";
@@ -26,15 +28,17 @@ class ServiceUser extends User {
   // }
   constructor(data: any) {
     super(data);
-    this.address1 = data.address1;
-    this.city = data.city;
-    this.state = data.state;
-    this.zip = data.zip;
-    this.country = data.country;
-    this.phone = data.phone;
-    this.email = data.email;
-    this.jobs = new Array();
-    this.accounts = new Array();
+    this.address1 = (data.address1) ? data.address1 : "";
+    this.city = (data.city) ? data.city : "";
+    this.state = (data.state) ? data.state : "";
+    this.zip = (data.zip) ? data.zip : "";
+    this.country = (data.country) ? data.country : "";
+    this.phone = (data.phone) ? data.phone : "";
+    this.email = (data.email) ? data.email : "";
+    this.password = (data.password) ? data.password : "";
+    this.jobs = (data.jobs) ? data.jobs : new Array();
+    this.accounts = (data.accounts) ? data.accounts : new Array();
+    this.reports = (data.reports) ? data.reports : new Array();
   }
   getAddress1() {
     return this.address1;
@@ -63,11 +67,17 @@ class ServiceUser extends User {
   getZip() {
     return this.zip;
   }
+  getPassword() {
+    return this.password;
+  }
   getJobs() {
     return this.jobs;
   }
   getAccounts() {
     return this.accounts;
+  }
+  getReports() {
+    return this.reports;
   }
 }
 

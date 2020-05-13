@@ -1,5 +1,6 @@
 import axios from 'axios';
 import AuthService from '../services/AuthService';
+import { Auth } from '..';
 
 class Http {
   defaultOptions: any;
@@ -20,11 +21,11 @@ class Http {
   async get(endPoint: string, useToken: boolean = true) {
     const options = this.defaultOptions;
     if (useToken) {
-      options.headers.Authorization = AuthService.getToken();
+      options.headers["x-access-token"] = AuthService.getToken();
     }
     try {
       const response = await this.requestInstance.get(endPoint, options);
-      return { status: true, data: response };
+      return (response && response.data) ? response.data : {status: false, error: "Error occurred"};
     } catch (e) {
       return Promise.reject({ status: false, error: e });
     }
@@ -33,12 +34,12 @@ class Http {
   async post(endPoint: string, data: any, useToken: boolean = true) {
     const options = this.defaultOptions;
     if (useToken) {
-      options.headers.Authorization = AuthService.getToken();
+      options.headers["x-access-token"] = AuthService.getToken();
     }
 
     try {
       const response = await this.requestInstance.post(endPoint, data, options);
-      return { status: true, data: response };
+      return (response && response.data) ? response.data : {status: false, error: "Error occurred"};
     } catch (e) {
       return Promise.reject({ status: false, error: e });
     }

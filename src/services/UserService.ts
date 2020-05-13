@@ -4,15 +4,20 @@ import ServiceUser from '../models/ServiceUser';
 
 class UserService {
   static async addUser(user: ServiceUser) {
-    const response = await SDKManager.dataProvider.addUser({
-      firstName: user.getFirstName(),
-      lastName: user.getLastName(),
-      city: user.getCity(),
-      zip: user.getZip(),
-      phone: user.getPhone(),
-      email: user.getEmail(),
-    });
-    return response ? response.status : false;
+    try {
+      const response = await SDKManager.dataProvider.addUser({
+        firstName: user.getFirstName(),
+        lastName: user.getLastName(),
+        city: user.getCity(),
+        zip: user.getZip(),
+        phone: user.getPhone(),
+        email: user.getEmail(),
+        password: user.getPassword()
+      });
+      return response;
+    } catch(error) {
+      throw error;
+    }
   }
 
   static async getUsers() {
@@ -26,10 +31,7 @@ class UserService {
 
   static async getUser(id: number) {
     const response = await SDKManager.dataProvider.getUser(id);
-    if (response && response.status) {
-      return new ServiceUser(response);
-    }
-    return null;
+    return (response) ? new ServiceUser(response) : false;
   }
 
   static async removeUser(id: number) {
