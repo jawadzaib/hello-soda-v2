@@ -4,11 +4,12 @@ import ISocialApp from '../interfaces/ISocialApp';
 import User from '../models/User';
 import Http from '../core/Http';
 import { API_URL } from '../constants';
+import { config } from 'dotenv';
 
 class APIProvider implements IUser, IAuth, ISocialApp {
   http: Http;
   constructor() {
-    this.http = new Http(API_URL);
+    this.http = new Http((process.env.API_URL) ? process.env.API_URL : API_URL);
   }
 
   async addUser(user: User) {

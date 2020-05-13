@@ -3,12 +3,13 @@ import ServiceUser from '../models/ServiceUser';
 
 test('Get User Service', (done) => {
   SDKManager.useProvider(SDKManager.Type.API);
-  Auth.getProfile().then(response => {
-    if(response) {
-      console.log(response.getReports());
-    }
-    done();
-  })
+  // done();
+  // Auth.getProfile().then(response => {
+  //   if(response) {
+  //     console.log(response.getReports());
+  //   }
+  //   done();
+  // })
   // const user = new ServiceUser({
   //   firstName: 'Jawad',
   //   lastName: 'Zaib',
@@ -18,13 +19,13 @@ test('Get User Service', (done) => {
   // Users.addUser(user).then((response) => {
   //   done();
   // });
-  // Auth.login("jawad@censeo-partners.com", "admin").then(response => {
-  //   if(response) {
-  //     done();
-  //   }
-  // }).catch(error => {
-  //   console.log(error);
-  // })
+  Auth.login("jawad@censeo-partners.com", "admin").then(response => {
+    if(response) {
+      done();
+    }
+  }).catch(error => {
+    console.log(error);
+  })
   // Facebook.connect({ appId: '613018332634917', appSecret: 'a8fa8c13d4857a1713e80202ee676c30' });
   // Facebook.getLoginURL('http://www.google.com').then((response) => {
   //   console.log(response);
