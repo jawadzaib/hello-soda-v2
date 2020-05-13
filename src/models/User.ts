@@ -1,16 +1,25 @@
-import SocialAccount from './SocialAccount';
 
-interface User {
-  firstName: string;
-  lastName: string;
-  address1: string;
-  city: string;
-  state: string;
-  zip: string;
-  country: string;
-  phone: string;
-  email: string;
-  accounts: SocialAccount[];
+
+abstract class User {
+    protected firstName: string;    
+    protected lastName: string;
+    constructor(data: any) {
+        this.firstName = data.firstName
+        this.lastName = data.lastName
+    }
+    getAddress1() {
+    }
+    setAddress1(address1: string) {
+    }
+    getFirstName() {}
+    getLastName() {}
+    getCity() {}
+    getPhone() {}
+    getEmail() {}
+    getCountry() {}
+    getZip() {}
+    getJobs() {}
+    getAccounts() {}
 }
 
 export default User;

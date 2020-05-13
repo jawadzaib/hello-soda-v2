@@ -37,6 +37,9 @@ class DBProvider implements IUser, IAuth, ISocialApp {
   register(user: User) {
     throw new Error('Method not implemented.');
   }
+  getProfile() {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export default DBProvider;

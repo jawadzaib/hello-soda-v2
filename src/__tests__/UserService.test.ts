@@ -1,13 +1,12 @@
-import { Facebook, SDKManager } from './../index';
+import { Facebook, SDKManager, Auth, Users } from './../index';
+import ServiceUser from "../models/ServiceUser";
 
 test('Get User Service', (done) => {
   SDKManager.useProvider(SDKManager.Type.API);
-  Facebook.connect({ appId: '613018332634917', appSecret: 'a8fa8c13d4857a1713e80202ee676c30' });
-  Facebook.getLoginURL('http://www.google.com').then((response) => {
-    console.log(response);
-    done();
-  });
-  // Users.addUser({
+  Users.getUser(23423).then(response => {
+    console.log(response.getFirstName())
+  })
+  // const user = new ServiceUser({
   //   "firstName": "firstName",
   //   "lastName" : "lastName",
   //   "address1" : "shippingAddress1",
@@ -16,12 +15,20 @@ test('Get User Service', (done) => {
   //   "zip"      : "1234",
   //   "country"  : "US",
   //   "phone"    : "000000000",
-  //   "email"    : "abdulsalam1@gmail.com",
-  //   "productId": 1,
-  //   "campaignId": 1,
-  //   "shippingId": 1,
-  //   "notes"    : "test"
-  // }).then(response => {
+  //   "email"    : "abdulsalam1@gmail.com"
+  // });
+  // console.log(user.getFirstName());
+  // Users.addUser(user).then(response => {
+  //   // console.log(response);
+  //   done();
+  // });
+  // Auth.login("testing", "1223").then(response => {
+  //   console.log("success");
+  // }).catch(error => {
+  //   console.log(error);
+  // })
+  // Facebook.connect({ appId: '613018332634917', appSecret: 'a8fa8c13d4857a1713e80202ee676c30' });
+  // Facebook.getLoginURL('http://www.google.com').then((response) => {
   //   console.log(response);
   //   done();
   // });

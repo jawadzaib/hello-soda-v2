@@ -9,16 +9,40 @@ class AuthService {
     sessionStorage.setItem('SOCIAL_APP_TOKEN', token);
   }
   static async login(username: string, password: string) {
-    const response = await SDKManager.dataProvider.login(username, password);
-    return response ? response.status : false;
+    try {
+      const response = await SDKManager.dataProvider.login(username, password);
+      if(response.token) {
+        AuthService.setToken(response.token);
+      }
+      return response ? response.status : false;
+    } catch (error) {
+      throw error;
+    }
   }
   static async logout() {
-    const response = await SDKManager.dataProvider.logout();
-    return response ? response.status : false;
+    try {
+      const response = await SDKManager.dataProvider.logout();
+      return response ? response.status : false;
+    } catch (error) {
+      throw error;
+    }
   }
   static async register(user: User) {
-    const response = await SDKManager.dataProvider.register(user);
-    return response ? response.status : false;
+    try {
+      const response = await SDKManager.dataProvider.register(user);
+      return response ? response.status : false;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getProfile() {
+    try {
+      const response = await SDKManager.dataProvider.getProfile();
+      return response ? response.data as User : false;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 

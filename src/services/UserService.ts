@@ -1,9 +1,17 @@
 import User from '../models/User';
 import SDKManager from '../core/SDKManager';
+import ServiceUser from '../models/ServiceUser';
 
 class UserService {
   static async addUser(user: User) {
-    const response = await SDKManager.dataProvider.addUser(user);
+    const response = await SDKManager.dataProvider.addUser({
+      firstName: user.getFirstName(),
+      lastName: user.getLastName(),
+      city: user.getCity(),
+      zip: user.getZip(),
+      phone: user.getPhone(),
+      email: user.getEmail()
+    });
     return response ? response.status : false;
   }
 
@@ -18,9 +26,9 @@ class UserService {
 
   static async getUser(id: number) {
     const response = await SDKManager.dataProvider.getUser(id);
-    if (response.status) {
-      return response.data as User;
-    }
+    console.log(response)
+    const user = new ServiceUser(response);
+     return user;
     return null;
   }
 

@@ -26,7 +26,7 @@ class Http {
       const response = await this.requestInstance.get(endPoint, options);
       return { status: true, data: response };
     } catch (e) {
-      return { status: false };
+      return Promise.reject({ status: false, error: e })
     }
   }
 
@@ -40,7 +40,7 @@ class Http {
       const response = await this.requestInstance.post(endPoint, data, options);
       return { status: true, data: response };
     } catch (e) {
-      return { status: false };
+      return Promise.reject({ status: false, error: e });
     }
   }
 }

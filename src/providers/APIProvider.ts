@@ -12,7 +12,7 @@ class APIProvider implements IUser, IAuth, ISocialApp {
   }
 
   async addUser(user: User) {
-    return await this.http.post('/users/create', user);
+    return await this.http.post('/prospects/create', user, false);
   }
 
   async getUsers() {
@@ -20,7 +20,14 @@ class APIProvider implements IUser, IAuth, ISocialApp {
   }
 
   async getUser(id: number) {
-    return await this.http.get('/users/' + id);
+    // return await this.http.get('/users/' + id);
+    return new Promise(resolve => {
+      resolve({
+        firstName: "testing",
+        lastName: "last name 1",
+        address1: "address"
+      })
+    })
   }
 
   async removeUser(id: number) {
@@ -38,6 +45,9 @@ class APIProvider implements IUser, IAuth, ISocialApp {
   }
   async register(user: User) {
     return await this.http.post('/hellosodausers/create', user, false);
+  }
+  async getProfile() {
+    return await this.http.get('/hellosodausers/getProfile');
   }
 }
 
