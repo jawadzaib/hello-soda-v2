@@ -6,7 +6,7 @@ class DBProvider implements IDataProvider {
   private userModel: any;
   initialize(mongoose: any, validator: any) {
     this.mongoose = mongoose;
-    let userSchema = new this.mongoose.Schema(
+    const userSchema = new this.mongoose.Schema(
       {
         firstName: { type: 'string', required: true },
         lastName: { type: 'string', required: true },
