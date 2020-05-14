@@ -13,7 +13,7 @@ class JobService {
           email: user.getEmail()
         },
         application_id: applicationId,
-        tokens: tokens
+        tokens
       })
       if(response.success) {
         return true;
