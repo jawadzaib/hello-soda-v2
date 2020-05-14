@@ -1,13 +1,32 @@
 import User from '../models/User';
 import IDataProvider from '../interfaces/IDataProvider';
-import Database from './../core/Database'
 
 class DBProvider implements IDataProvider {
-  private database : Database;
-  constructor() {
-    this.database = new Database()
-    // get instance of mongoDB Client
-    // connect using mongoDB Client instance
+  private mongoose: any;
+  private userModel: any;
+  initialize(mongoose: any, validator: any) {
+    this.mongoose = mongoose;
+    let userSchema = new this.mongoose.Schema(
+      {
+        firstName: { type: 'string', required: true },
+        lastName: { type: 'string', required: true },
+        email: {
+          type: String,
+          required: true,
+          unique: true,
+          lowercase: true,
+          validate: (value: any) => {
+            return validator.isEmail(value);
+          },
+        },
+        password: { type: 'string', required: true },
+        reports: { type: 'array', default: [] },
+        createdDate: { type: Date, default: Date.now },
+      },
+      { minimize: false },
+    );
+    this.userModel = this.mongoose.model('User', userSchema);
+    console.log(this.userModel);
   }
   addUser(user: User) {
     throw new Error('Method not implemented.');
@@ -18,7 +37,7 @@ class DBProvider implements IDataProvider {
   }
 
   getUser(id: number) {
-    throw new Error('Method not implemented.');
+    return this.userModel.findOne({ user_id: id });
   }
 
   removeUser(id: number) {

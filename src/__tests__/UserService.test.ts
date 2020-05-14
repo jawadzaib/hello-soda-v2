@@ -4,9 +4,8 @@ import ServerResponse from '../models/ServerResponse';
 import JobService from '../services/JobService';
 
 test('Get User Service', (done) => {
-  SDKManager.useProvider(SDKManager.Type.API);
-  // console.log("testing")
-  done()
+  SDKManager.useProvider(SDKManager.Type.Database);
+  done();
 
   // done();
   // Auth.getProfile().then(response => {
