@@ -16,7 +16,7 @@
     "postversion": "git push && git push --tags"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@jawadzaib"
+    "registry": "https://registry.npmjs.org"
   },
   "repository": {
     "type": "git",

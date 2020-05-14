@@ -11,6 +11,9 @@ class SocialScore {
   getValue() {
     return this.value;
   }
+  setValue(value: string) {
+      this.value = value
+  }
 }
 
 export default SocialScore;
