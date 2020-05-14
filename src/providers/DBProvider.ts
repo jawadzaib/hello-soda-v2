@@ -1,8 +1,11 @@
 import User from '../models/User';
 import IDataProvider from '../interfaces/IDataProvider';
+import Database from './../core/Database'
 
 class DBProvider implements IDataProvider {
+  private database : Database;
   constructor() {
+    this.database = new Database()
     // get instance of mongoDB Client
     // connect using mongoDB Client instance
   }
