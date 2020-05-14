@@ -1,12 +1,10 @@
-import IUser from '../interfaces/IUser';
-import IAuth from '../interfaces/IAuth';
-import ISocialApp from '../interfaces/ISocialApp';
 import User from '../models/User';
 import Http from '../core/Http';
 import { API_URL } from '../constants';
 import { config } from 'dotenv';
+import IDataProvider from '../interfaces/IDataProvider';
 
-class APIProvider implements IUser, IAuth, ISocialApp {
+class APIProvider implements IDataProvider {
   http: Http;
   constructor() {
     this.http = new Http(process.env.API_URL ? process.env.API_URL : API_URL);
@@ -42,6 +40,15 @@ class APIProvider implements IUser, IAuth, ISocialApp {
   }
   async getProfile() {
     return await this.http.get('/hellosodausers/');
+  }
+  async createJob(data: any) {
+    return await this.http.post('/hellosodajobs/create', data);
+  }
+  async getJob(data: any) {
+    return await this.http.get('/hellosodajobs', data);
+  }
+  getToken() {
+    throw new Error("Method not implemented.");
   }
 }
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import AuthService from '../services/AuthService';
-import { Auth } from '..';
+import ServerResponse from '../models/ServerResponse';
+import ServerException from '../models/ServerException';
 
 class Http {
   defaultOptions: any;
@@ -25,9 +26,9 @@ class Http {
     }
     try {
       const response = await this.requestInstance.get(endPoint, options);
-      return response && response.data ? response.data : { status: false, error: 'Error occurred' };
+      return new ServerResponse(response)
     } catch (e) {
-      return Promise.reject({ status: false, error: e });
+      return Promise.reject(new ServerException("Unable to process the request"));
     }
   }
 
@@ -39,9 +40,9 @@ class Http {
 
     try {
       const response = await this.requestInstance.post(endPoint, data, options);
-      return response && response.data ? response.data : { status: false, error: 'Error occurred' };
+      return new ServerResponse(response.data)
     } catch (e) {
-      return Promise.reject({ status: false, error: e });
+      return Promise.reject(new ServerException("Unable to process the request"));
     }
   }
 }

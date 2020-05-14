@@ -31,12 +31,12 @@ class UserService {
 
   static async getUser(id: number) {
     const response = await SDKManager.dataProvider.getUser(id);
-    return response ? new ServiceUser(response) : false;
+    return (response.status) ? new ServiceUser(response.data) : false;
   }
 
   static async removeUser(id: number) {
     const response = await SDKManager.dataProvider.removeUser(id);
-    return response ? response.status : false;
+    return response
   }
 }
 

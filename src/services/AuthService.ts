@@ -12,8 +12,8 @@ class AuthService {
   static async login(username: string, password: string) {
     try {
       const response = await SDKManager.dataProvider.login(username, password);
-      if (response.token) {
-        AuthService.setToken(response.token);
+      if (response.data.token) {
+        AuthService.setToken(response.data.token);
       }
       return response;
     } catch (error) {
@@ -40,7 +40,7 @@ class AuthService {
   static async getProfile() {
     try {
       const response = await SDKManager.dataProvider.getProfile();
-      return response ? new ServiceUser(response) : false;
+      return (response.status) ? new ServiceUser(response.data) : false;
     } catch (error) {
       throw error;
     }
