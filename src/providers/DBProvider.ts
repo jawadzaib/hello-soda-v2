@@ -26,7 +26,7 @@ class DBProvider implements IDataProvider {
       { minimize: false },
     );
     this.userModel = this.mongoose.model('User', userSchema);
-    return this
+    return this;
   }
   addUser(user: User) {
     throw new Error('Method not implemented.');
