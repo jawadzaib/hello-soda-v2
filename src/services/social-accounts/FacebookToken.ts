@@ -1,6 +1,5 @@
-import IToken from '../../interfaces/IToken';
 
-class FacebookToken implements IToken {
+class FacebookToken{
   getToken() {
     throw new Error('Method not implemented.');
   }
