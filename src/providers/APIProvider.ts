@@ -48,7 +48,7 @@ class APIProvider implements IDataProvider {
     return await this.http.get('/hellosodajobs', data);
   }
   getToken() {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }
 

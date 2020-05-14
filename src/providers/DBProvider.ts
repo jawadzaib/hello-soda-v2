@@ -1,4 +1,3 @@
-
 import User from '../models/User';
 import IDataProvider from '../interfaces/IDataProvider';
 
@@ -40,13 +39,13 @@ class DBProvider implements IDataProvider {
     throw new Error('Method not implemented.');
   }
   getToken() {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   createJob(data: any) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   getJob(data: any) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }
 

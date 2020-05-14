@@ -26,9 +26,9 @@ class Http {
     }
     try {
       const response = await this.requestInstance.get(endPoint, options);
-      return new ServerResponse(response)
+      return new ServerResponse(response);
     } catch (e) {
-      return Promise.reject(new ServerException("Unable to process the request"));
+      return Promise.reject(new ServerException('Unable to process the request'));
     }
   }
 
@@ -40,9 +40,9 @@ class Http {
 
     try {
       const response = await this.requestInstance.post(endPoint, data, options);
-      return new ServerResponse(response.data)
+      return new ServerResponse(response.data);
     } catch (e) {
-      return Promise.reject(new ServerException("Unable to process the request"));
+      return Promise.reject(new ServerException('Unable to process the request'));
     }
   }
 }

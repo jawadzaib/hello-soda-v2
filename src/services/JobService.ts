@@ -10,18 +10,18 @@ class JobService {
         data: {
           first_name: user.getFirstName(),
           last_name: user.getLastName(),
-          email: user.getEmail()
+          email: user.getEmail(),
         },
         application_id: applicationId,
-        tokens
-      })
-      if(response.success) {
+        tokens,
+      });
+      if (response.success) {
         return true;
       } else {
         return false;
       }
-    } catch(error) {
-      throw error
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -29,16 +29,16 @@ class JobService {
     try {
       const response = SDKManager.dataProvider.getJob({
         job_id: id,
-        report: (fetchReport) ? 1 : 0
-      })
-      if(response && response.data) {
+        report: fetchReport ? 1 : 0,
+      });
+      if (response && response.data) {
         const job = new Job(response.data[0]);
-        return job
+        return job;
       } else {
-        return false
+        return false;
       }
-    } catch(error) {
-      throw error
+    } catch (error) {
+      throw error;
     }
   }
 }

@@ -30,23 +30,23 @@ class ServiceUser extends User {
   // }
   constructor(data?: any) {
     super(data);
-    this.address1 = (data && data.address1) ? data.address1 : '';
-    this.city = (data && data.city) ? data.city : '';
-    this.state = (data && data.state) ? data.state : '';
-    this.zip = (data && data.zip) ? data.zip : '';
-    this.country = (data && data.country) ? data.country : '';
-    this.phone = (data && data.phone) ? data.phone : '';
-    this.email = (data && data.email) ? data.email : '';
-    this.password = (data && data.password) ? data.password : '';
-    this.jobs = (data && data.jobs) ? data.jobs : new Array();
-    this.accounts = (data && data.accounts) ? data.accounts : new Array();
+    this.address1 = data && data.address1 ? data.address1 : '';
+    this.city = data && data.city ? data.city : '';
+    this.state = data && data.state ? data.state : '';
+    this.zip = data && data.zip ? data.zip : '';
+    this.country = data && data.country ? data.country : '';
+    this.phone = data && data.phone ? data.phone : '';
+    this.email = data && data.email ? data.email : '';
+    this.password = data && data.password ? data.password : '';
+    this.jobs = data && data.jobs ? data.jobs : new Array();
+    this.accounts = data && data.accounts ? data.accounts : new Array();
     this.reports = new Array<Report>();
-    if(data && data.reports) {
-        data.reports.forEach((item: any) => {
-            this.reports.push(new Report(item))
-        })
+    if (data && data.reports) {
+      data.reports.forEach((item: any) => {
+        this.reports.push(new Report(item));
+      });
     }
-    this.currentReport = (this.reports) ? this.reports[this.reports.length - 1] : new Report();
+    this.currentReport = this.reports ? this.reports[this.reports.length - 1] : new Report();
   }
   getAddress1() {
     return this.address1;
