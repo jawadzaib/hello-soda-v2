@@ -3,7 +3,7 @@ import IDataProvider from '../interfaces/IDataProvider';
 
 class DBProvider implements IDataProvider {
   private mongoose: any;
-  private userModel: any;
+  public userModel: any;
   initialize(mongoose: any, validator: any) {
     this.mongoose = mongoose;
     const userSchema = new this.mongoose.Schema(
@@ -37,7 +37,6 @@ class DBProvider implements IDataProvider {
   }
 
   getUser(id: number) {
-    console.log(this.userModel)
     return this.userModel.findOne({ user_id: id });
   }
 
