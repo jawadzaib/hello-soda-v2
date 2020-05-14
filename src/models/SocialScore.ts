@@ -12,7 +12,7 @@ class SocialScore {
     return this.value;
   }
   setValue(value: string) {
-      this.value = value
+    this.value = value;
   }
 }
 
