@@ -5,6 +5,9 @@ import { API_URL } from './../constants';
 class SDKManager {
   static dataProvider: any = new APIProvider();
   static Type = { API: 0, Database: 1 };
+  static UserModel: any;
+  static JobQueueModel: any;
+  static JobQueueLogModel: any;
 
   static useProvider(providerName: number, mongoose?: any, validator?: any) {
     let provider = null;

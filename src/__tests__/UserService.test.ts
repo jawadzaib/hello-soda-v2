@@ -1,21 +1,23 @@
 import { Facebook, SDKManager, Auth, Users, Jobs } from './../index';
-import ServiceUser from '../models/ServiceUser';
-import ServerResponse from '../models/ServerResponse';
 
 test('Get User Service', (done) => {
   SDKManager.useProvider(SDKManager.Type.API);
   // done();
 
   // Auth.getProfile().then((user) => {
-  //   if(user) {
-  //     Jobs.create('200308794873', {
-  //       facebook: '3a5751f6eff0fb4b5a160012fa13f22d'
-  //     }, user).then((response : any) => {
+  //   if (user) {
+  //     Jobs.create(
+  //       '200308794873',
+  //       {
+  //         facebook: '3a5751f6eff0fb4b5a160012fa13f22d',
+  //       },
+  //       user,
+  //     ).then((response: any) => {
   //       console.log(response);
-  //       done()
-  //     })
+  //       done();
+  //     });
   //   }
-  // })
+  // });
   // const user = new ServiceUser({
   //   firstName: 'Jawad',
   //   lastName: 'Zaib',
@@ -27,7 +29,7 @@ test('Get User Service', (done) => {
   //   done();
   // });
   Auth.login('jawad@censeo-partners.com', 'admin')
-    .then((response: ServerResponse) => {
+    .then((response: any) => {
       console.log(response);
       if (response) {
         done();
