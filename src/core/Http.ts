@@ -40,7 +40,7 @@ class Http {
 
     try {
       const response = await this.requestInstance.post(endPoint, data, options);
-      return new ServerResponse({status: true, data: response.data});
+      return new ServerResponse({ status: true, data: response.data });
     } catch (e) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }

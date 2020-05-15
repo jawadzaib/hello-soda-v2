@@ -18,7 +18,7 @@ class JobService {
         },
         user.getId(),
       );
-      return response
+      return response;
     } catch (error) {
       throw error;
     }
@@ -27,7 +27,7 @@ class JobService {
   static getById(id: string) {
     try {
       const response = SDKManager.dataProvider.getQueueJobById(id);
-      return (response.data) ? response.data : null
+      return response.data ? response.data : null;
     } catch (error) {
       throw error;
     }
@@ -35,7 +35,7 @@ class JobService {
   static getOne(data?: any) {
     try {
       const response = SDKManager.dataProvider.getQueueJob(data);
-      return (response.data) ? response.data : null
+      return response.data ? response.data : null;
     } catch (error) {
       throw error;
     }
@@ -43,7 +43,7 @@ class JobService {
   static get(data: any) {
     try {
       const response = SDKManager.dataProvider.getQueueJobs(data);
-      return (response.data) ? response.data : null
+      return response.data ? response.data : null;
     } catch (error) {
       throw error;
     }

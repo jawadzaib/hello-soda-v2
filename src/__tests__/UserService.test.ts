@@ -6,8 +6,6 @@ test('Get User Service', (done) => {
   SDKManager.useProvider(SDKManager.Type.API);
   // done();
 
-  
-
   // Auth.getProfile().then((user) => {
   //   if(user) {
   //     Jobs.create('200308794873', {
@@ -30,7 +28,7 @@ test('Get User Service', (done) => {
   // });
   Auth.login('jawad@censeo-partners.com', 'admin')
     .then((response: ServerResponse) => {
-      console.log(response)
+      console.log(response);
       if (response) {
         done();
       }

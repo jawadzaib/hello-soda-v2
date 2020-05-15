@@ -13,7 +13,7 @@ class Report {
   private socialConnectedness: any;
   private likelyOutcomeScore: any;
   private location: any;
-  private wordHighlights : any;
+  private wordHighlights: any;
   private topicMentions: any;
   private topWords: any;
   private wordCategories: any;
@@ -23,7 +23,6 @@ class Report {
   private geoDetail: any;
   private onlineActivity: any;
   private spending: any;
-
 
   constructor(data?: any) {
     this.scores = new Array<SocialScore>();
@@ -92,25 +91,25 @@ class Report {
     return this.location;
   }
   getWordHighlights() {
-    return this.wordHighlights
+    return this.wordHighlights;
   }
   getTopicMentions() {
-    return this.topicMentions
+    return this.topicMentions;
   }
   getTopWords() {
-    return this.topWords
+    return this.topWords;
   }
   getWordCategories() {
-    return this.wordCategories
+    return this.wordCategories;
   }
   getPersonalAddress() {
-    return this.personalAddress
+    return this.personalAddress;
   }
   getFlaggedPhrases() {
-    return this.flaggedPhrases
+    return this.flaggedPhrases;
   }
   getInterestMentions() {
-    return this.interestMentions
+    return this.interestMentions;
   }
 }
 

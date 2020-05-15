@@ -26,7 +26,7 @@ class DBProvider implements IDataProvider {
       }
       let userModel = new this.userModel(user);
       response = await userModel.save();
-      return new ServerResponse({status: true, data: response});
+      return new ServerResponse({ status: true, data: response });
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -39,7 +39,7 @@ class DBProvider implements IDataProvider {
   async getUser(id: string) {
     try {
       let response = await this.userModel.findById(id);
-      return new ServerResponse({status: true, data: response});
+      return new ServerResponse({ status: true, data: response });
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -48,7 +48,7 @@ class DBProvider implements IDataProvider {
   async getUserByEmail(email: string) {
     try {
       let response = await this.userModel.findOne({ email: email });
-      return new ServerResponse({status: true, data: response});
+      return new ServerResponse({ status: true, data: response });
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -98,19 +98,21 @@ class DBProvider implements IDataProvider {
         job.job_processed = false;
         job.job_object = data;
         job.save();
-        return new ServerResponse({status: true, data: new JobQueue(job)});
+        return new ServerResponse({ status: true, data: new JobQueue(job) });
       } else {
-        let jobData = { user_id: userId, job_object: data}
-        let job = new this.jobModel(jobData)
+        let jobData = { user_id: userId, job_object: data };
+        let job = new this.jobModel(jobData);
         try {
-          let response = await job.save()
-          if(response.id) {
-            return new ServerResponse({status: true, data: new JobQueue(response)})
+          let response = await job.save();
+          if (response.id) {
+            return new ServerResponse({ status: true, data: new JobQueue(response) });
           } else {
             return Promise.reject(new ServerException('Unable to process the request'));
           }
-        } catch(error) {
-          return Promise.reject(new ServerException((error.code == '11000') ? 'Duplicate entry error' : 'Unable to save job'))
+        } catch (error) {
+          return Promise.reject(
+            new ServerException(error.code == '11000' ? 'Duplicate entry error' : 'Unable to save job'),
+          );
         }
       }
     } catch (error) {
@@ -122,9 +124,9 @@ class DBProvider implements IDataProvider {
   }
   async createJobLog(data: any, userId?: string | '') {
     try {
-      let log = new this.jobLogModel(data)
-      log.save()
-      return new ServerResponse({status: true, data: new JobQueueLog(log)})
+      let log = new this.jobLogModel(data);
+      log.save();
+      return new ServerResponse({ status: true, data: new JobQueueLog(log) });
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -132,8 +134,8 @@ class DBProvider implements IDataProvider {
   async getQueueJobById(id: string) {
     try {
       const job = await this.jobModel.findById(id);
-      if(job.id) {
-        return new ServerResponse({status: true, data: new JobQueue(job)})
+      if (job.id) {
+        return new ServerResponse({ status: true, data: new JobQueue(job) });
       } else {
         return Promise.reject(new ServerException('Unable to process the request'));
       }
@@ -144,8 +146,8 @@ class DBProvider implements IDataProvider {
   async getQueueJob(data?: any) {
     try {
       const job = await this.jobModel.findOne(data);
-      if(job.id) {
-        return new ServerResponse({status: true, data: new JobQueue(job)})
+      if (job.id) {
+        return new ServerResponse({ status: true, data: new JobQueue(job) });
       } else {
         return Promise.reject(new ServerException('Unable to process the request'));
       }
@@ -156,12 +158,12 @@ class DBProvider implements IDataProvider {
   async getQueueJobs(data?: any, limit?: null) {
     try {
       const jobsData = await this.jobModel.find(data).limit(limit);
-      if(jobsData) {
-        let jobs = new Array<JobQueue>()
+      if (jobsData) {
+        let jobs = new Array<JobQueue>();
         jobsData.forEach((item: any) => {
-          jobs.push(new JobQueue(item))
-        })
-        return new ServerResponse({status: true, data: jobs})
+          jobs.push(new JobQueue(item));
+        });
+        return new ServerResponse({ status: true, data: jobs });
       } else {
         return Promise.reject(new ServerException('Unable to process the request'));
       }

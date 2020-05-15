@@ -67,13 +67,13 @@ class APIProvider implements IDataProvider {
     throw new Error('Method not implemented.');
   }
   getQueueJobById(id: string) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   getQueueJob(data?: any) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   getQueueJobs(data?: any, limit?: any) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   getToken() {
     throw new Error('Method not implemented.');
