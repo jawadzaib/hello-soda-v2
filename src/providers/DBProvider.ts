@@ -24,7 +24,7 @@ class DBProvider implements IDataProvider {
       if (response) {
         return Promise.reject(new ServerException('User already exists!'));
       }
-      let userModel = new this.userModel(user);
+      const userModel = new this.userModel(user);
       response = await userModel.save();
       return new ServerResponse({ status: true, data: response });
     } catch (error) {
@@ -38,7 +38,7 @@ class DBProvider implements IDataProvider {
 
   async getUser(id: string) {
     try {
-      let response = await this.userModel.findById(id);
+      const response = await this.userModel.findById(id);
       return new ServerResponse({ status: true, data: response });
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
@@ -47,7 +47,7 @@ class DBProvider implements IDataProvider {
 
   async getUserByEmail(email: string) {
     try {
-      let response = await this.userModel.findOne({ email: email });
+      const response = await this.userModel.findOne({ email });
       return new ServerResponse({ status: true, data: response });
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
@@ -81,18 +81,24 @@ class DBProvider implements IDataProvider {
     try {
       const job = await this.jobModel.findOne({ user_id: userId });
       if (job != null && job.id !== '') {
-        let dbTokens = job.job_object.tokens;
-        let reqTokens = data.tokens;
-        //traverse on db tokens & add in request which are not present
-        for (let dbkey in dbTokens) {
-          let found = false;
-          for (var reqKey in reqTokens) {
-            if (reqKey == dbkey) {
-              found = true;
+        const dbTokens = job.job_object.tokens;
+        const reqTokens = data.tokens;
+        // traverse on db tokens & add in request which are not present
+        if(dbTokens) {
+          for (const dbkey in dbTokens) {
+            if(dbTokens.hasOwnProperty(dbkey)) {
+              let found = false;
+              if(reqTokens) {
+                for (const reqKey in reqTokens) {
+                  if (reqTokens.hasOwnProperty(reqKey) && reqKey === dbkey) {
+                    found = true;
+                  }
+                }
+              }
+              if (!found) {
+                data.tokens[dbkey] = dbTokens[dbkey];
+              }
             }
-          }
-          if (!found) {
-            data.tokens[dbkey] = dbTokens[dbkey];
           }
         }
         job.job_processed = false;
@@ -100,10 +106,10 @@ class DBProvider implements IDataProvider {
         job.save();
         return new ServerResponse({ status: true, data: new JobQueue(job) });
       } else {
-        let jobData = { user_id: userId, job_object: data };
-        let job = new this.jobModel(jobData);
+        const jobData = { user_id: userId, job_object: data };
+        const newJob = new this.jobModel(jobData);
         try {
-          let response = await job.save();
+          const response = await newJob.save();
           if (response.id) {
             return new ServerResponse({ status: true, data: new JobQueue(response) });
           } else {
@@ -111,7 +117,7 @@ class DBProvider implements IDataProvider {
           }
         } catch (error) {
           return Promise.reject(
-            new ServerException(error.code == '11000' ? 'Duplicate entry error' : 'Unable to save job'),
+            new ServerException(error.code === '11000' ? 'Duplicate entry error' : 'Unable to save job'),
           );
         }
       }
@@ -124,7 +130,7 @@ class DBProvider implements IDataProvider {
   }
   async createJobLog(data: any, userId?: string | '') {
     try {
-      let log = new this.jobLogModel(data);
+      const log = new this.jobLogModel(data);
       log.save();
       return new ServerResponse({ status: true, data: new JobQueueLog(log) });
     } catch (error) {
@@ -159,7 +165,7 @@ class DBProvider implements IDataProvider {
     try {
       const jobsData = await this.jobModel.find(data).limit(limit);
       if (jobsData) {
-        let jobs = new Array<JobQueue>();
+        const jobs = new Array<JobQueue>();
         jobsData.forEach((item: any) => {
           jobs.push(new JobQueue(item));
         });
