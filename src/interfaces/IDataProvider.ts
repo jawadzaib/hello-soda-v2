@@ -13,9 +13,12 @@ interface IDataProvider {
   getUserByEmail(email: string): any;
   removeUser(id: string): any;
   getSocialAccounts(): any;
-  createJob(data: any, userId?: string): any;
+  createQueueJob(data: any, userId?: string): any;
   createJobLog(data: any, userId?: string): any;
   getJob(data: any): any;
+  getQueueJobById(id: string): any;
+  getQueueJob(data?: any): any;
+  getQueueJobs(data?: any, limit?: any): any;
 }
 
 export default IDataProvider;

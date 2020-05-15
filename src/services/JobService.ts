@@ -6,7 +6,7 @@ import Job from '../models/Job';
 class JobService {
   create(applicationId: string, tokens: any, user: ServiceUser) {
     try {
-      const response = SDKManager.dataProvider.createJob(
+      const response = SDKManager.dataProvider.createQueueJob(
         {
           data: {
             first_name: user.getFirstName(),
@@ -18,28 +18,32 @@ class JobService {
         },
         user.getId(),
       );
-      if (response.success) {
-        return true;
-      } else {
-        return false;
-      }
+      return response
     } catch (error) {
       throw error;
     }
   }
 
-  getOne(id: string, fetchReport: boolean = true) {
+  getById(id: string) {
     try {
-      const response = SDKManager.dataProvider.getJob({
-        job_id: id,
-        report: fetchReport ? 1 : 0,
-      });
-      if (response && response.data) {
-        const job = new Job(response.data[0]);
-        return job;
-      } else {
-        return false;
-      }
+      const response = SDKManager.dataProvider.getQueueJobById(id);
+      return (response.data) ? response.data : null
+    } catch (error) {
+      throw error;
+    }
+  }
+  getOne(data?: any) {
+    try {
+      const response = SDKManager.dataProvider.getQueueJob(data);
+      return (response.data) ? response.data : null
+    } catch (error) {
+      throw error;
+    }
+  }
+  get(data: any) {
+    try {
+      const response = SDKManager.dataProvider.getQueueJobs(data);
+      return (response.data) ? response.data : null
     } catch (error) {
       throw error;
     }

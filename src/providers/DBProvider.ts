@@ -3,6 +3,8 @@ import IDataProvider from '../interfaces/IDataProvider';
 import ServerException from '../models/ServerException';
 import ServerResponse from '../models/ServerResponse';
 import Database from '../core/Database';
+import JobQueue from '../models/JobQueue';
+import JobQueueLog from '../models/JobQueueLog';
 
 class DBProvider implements IDataProvider {
   private database: Database;
@@ -75,7 +77,7 @@ class DBProvider implements IDataProvider {
   getToken() {
     throw new Error('Method not implemented.');
   }
-  async createJob(data: any, userId?: any) {
+  async createQueueJob(data: any, userId?: any) {
     try {
       const job = await this.jobModel.findOne({ user_id: userId });
       if (job != null && job.id !== '') {
@@ -96,8 +98,20 @@ class DBProvider implements IDataProvider {
         job.job_processed = false;
         job.job_object = data;
         job.save();
-        return new ServerResponse(job);
+        return new ServerResponse(new JobQueue(job));
       } else {
+        let jobData = { user_id: userId, job_object: data}
+        let job = new this.jobModel(jobData)
+        try {
+          let response = await job.save()
+          if(response.id) {
+            return new ServerResponse(new JobQueue(response))
+          } else {
+            return Promise.reject(new ServerException('Unable to process the request'));
+          }
+        } catch(error) {
+          return Promise.reject(new ServerException((error.code == '11000') ? 'Duplicate entry error' : 'Unable to save job'))
+        }
       }
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
@@ -106,8 +120,54 @@ class DBProvider implements IDataProvider {
   getJob(data: any) {
     throw new Error('Method not implemented.');
   }
-  createJobLog(data: any, userId?: string | '') {
-    throw new Error('Method not implemented.');
+  async createJobLog(data: any, userId?: string | '') {
+    try {
+      let log = new this.jobLogModel(data)
+      log.save()
+      return new ServerResponse(new JobQueueLog(log))
+    } catch (error) {
+      return Promise.reject(new ServerException('Unable to process the request'));
+    }
+  }
+  async getQueueJobById(id: string) {
+    try {
+      const job = await this.jobModel.findById(id);
+      if(job.id) {
+        return new ServerResponse(new JobQueue(job))
+      } else {
+        return Promise.reject(new ServerException('Unable to process the request'));
+      }
+    } catch (error) {
+      return Promise.reject(new ServerException('Unable to process the request'));
+    }
+  }
+  async getQueueJob(data?: any) {
+    try {
+      const job = await this.jobModel.findOne(data);
+      if(job.id) {
+        return new ServerResponse(new JobQueue(job))
+      } else {
+        return Promise.reject(new ServerException('Unable to process the request'));
+      }
+    } catch (error) {
+      return Promise.reject(new ServerException('Unable to process the request'));
+    }
+  }
+  async getQueueJobs(data?: any, limit?: null) {
+    try {
+      const jobsData = await this.jobModel.find(data).limit(limit);
+      if(jobsData) {
+        let jobs = new Array<JobQueue>()
+        jobsData.forEach((item: any) => {
+          jobs.push(new JobQueue(item))
+        })
+        return new ServerResponse(jobs)
+      } else {
+        return Promise.reject(new ServerException('Unable to process the request'));
+      }
+    } catch (error) {
+      return Promise.reject(new ServerException('Unable to process the request'));
+    }
   }
 }
 

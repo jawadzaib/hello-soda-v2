@@ -54,7 +54,7 @@ class APIProvider implements IDataProvider {
   async getProfile() {
     return await this.http.get('/hellosodausers/');
   }
-  async createJob(data: any, userId?: string | '') {
+  async createQueueJob(data: any, userId?: string | '') {
     return await this.http.post('/hellosodajobs/create', data);
   }
   async getJob(data: any) {
@@ -62,6 +62,15 @@ class APIProvider implements IDataProvider {
   }
   createJobLog(data: any, userId?: string | '') {
     throw new Error('Method not implemented.');
+  }
+  getQueueJobById(id: string) {
+    throw new Error("Method not implemented.");
+  }
+  getQueueJob(data?: any) {
+    throw new Error("Method not implemented.");
+  }
+  getQueueJobs(data?: any, limit?: any) {
+    throw new Error("Method not implemented.");
   }
   getToken() {
     throw new Error('Method not implemented.');
