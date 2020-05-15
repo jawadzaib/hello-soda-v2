@@ -6,15 +6,18 @@ import Job from '../models/Job';
 class JobService {
   create(applicationId: string, tokens: any, user: ServiceUser) {
     try {
-      const response = SDKManager.dataProvider.createJob({
-        data: {
-          first_name: user.getFirstName(),
-          last_name: user.getLastName(),
-          email: user.getEmail(),
+      const response = SDKManager.dataProvider.createJob(
+        {
+          data: {
+            first_name: user.getFirstName(),
+            last_name: user.getLastName(),
+            email: user.getEmail(),
+          },
+          application_id: applicationId,
+          tokens,
         },
-        application_id: applicationId,
-        tokens,
-      });
+        user.getId(),
+      );
       if (response.success) {
         return true;
       } else {

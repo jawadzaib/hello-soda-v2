@@ -1,46 +1,58 @@
 import User from '../models/User';
 import IDataProvider from '../interfaces/IDataProvider';
+import ServerException from '../models/ServerException';
+import ServerResponse from '../models/ServerResponse';
+import Database from '../core/Database';
 
 class DBProvider implements IDataProvider {
-  private mongoose: any;
-  public userModel: any;
-  initialize(mongoose: any, validator: any) {
-    this.mongoose = mongoose;
-    const userSchema = new this.mongoose.Schema(
-      {
-        firstName: { type: 'string', required: true },
-        lastName: { type: 'string', required: true },
-        email: {
-          type: String,
-          required: true,
-          unique: true,
-          lowercase: true,
-          validate: (value: any) => {
-            return validator.isEmail(value);
-          },
-        },
-        password: { type: 'string', required: true },
-        reports: { type: 'array', default: [] },
-        createdDate: { type: Date, default: Date.now },
-      },
-      { minimize: false },
-    );
-    this.userModel = this.mongoose.model('User', userSchema);
-    return this;
+  private database: Database;
+  private userModel: any;
+  private jobModel: any;
+  private jobLogModel: any;
+  constructor(mongoose: any, validator: any) {
+    this.database = new Database(mongoose, validator);
+    this.userModel = this.database.getUserModel();
+    this.jobModel = this.database.getJobModel();
+    this.jobLogModel = this.database.getJobLogModel();
   }
-  addUser(user: User) {
-    throw new Error('Method not implemented.');
+
+  async addUser(user: User) {
+    try {
+      let response = await this.userModel.findOne({ email: user.getEmail() });
+      if (response) {
+        return Promise.reject(new ServerException('User already exists!'));
+      }
+      let userModel = new this.userModel(user);
+      response = await userModel.save();
+      return new ServerResponse(response);
+    } catch (error) {
+      return Promise.reject(new ServerException('Unable to process the request'));
+    }
   }
 
   getUsers() {
     throw new Error('Method not implemented.');
   }
 
-  getUser(id: number) {
-    return this.userModel.findOne({ user_id: id });
+  async getUser(id: string) {
+    try {
+      let response = await this.userModel.findById(id);
+      return new ServerResponse(response);
+    } catch (error) {
+      return Promise.reject(new ServerException('Unable to process the request'));
+    }
   }
 
-  removeUser(id: number) {
+  async getUserByEmail(email: string) {
+    try {
+      let response = await this.userModel.findOne({ email: email });
+      return new ServerResponse(response);
+    } catch (error) {
+      return Promise.reject(new ServerException('Unable to process the request'));
+    }
+  }
+
+  removeUser(id: string) {
     throw new Error('Method not implemented.');
   }
 
@@ -63,10 +75,38 @@ class DBProvider implements IDataProvider {
   getToken() {
     throw new Error('Method not implemented.');
   }
-  createJob(data: any) {
-    throw new Error('Method not implemented.');
+  async createJob(data: any, userId?: any) {
+    try {
+      const job = await this.jobModel.findOne({ user_id: userId });
+      if (job != null && job.id !== '') {
+        let dbTokens = job.job_object.tokens;
+        let reqTokens = data.tokens;
+        //traverse on db tokens & add in request which are not present
+        for (let dbkey in dbTokens) {
+          let found = false;
+          for (var reqKey in reqTokens) {
+            if (reqKey == dbkey) {
+              found = true;
+            }
+          }
+          if (!found) {
+            data.tokens[dbkey] = dbTokens[dbkey];
+          }
+        }
+        job.job_processed = false;
+        job.job_object = data;
+        job.save();
+        return new ServerResponse(job);
+      } else {
+      }
+    } catch (error) {
+      return Promise.reject(new ServerException('Unable to process the request'));
+    }
   }
   getJob(data: any) {
+    throw new Error('Method not implemented.');
+  }
+  createJobLog(data: any, userId?: string | '') {
     throw new Error('Method not implemented.');
   }
 }

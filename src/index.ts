@@ -26,6 +26,6 @@ export {
   ServerResponse,
   SocialScore,
   SocialAccount,
-  JobService,
+  JobService as Jobs,
   ServerException,
 };

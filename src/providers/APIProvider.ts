@@ -3,6 +3,7 @@ import Http from '../core/Http';
 import { API_URL } from '../constants';
 import { config } from 'dotenv';
 import IDataProvider from '../interfaces/IDataProvider';
+import AuthService from '../services/AuthService';
 
 class APIProvider implements IDataProvider {
   http: Http;
@@ -18,11 +19,15 @@ class APIProvider implements IDataProvider {
     return await this.http.get('/users');
   }
 
-  async getUser(id: number) {
+  async getUser(id: string) {
     return await this.http.get('/hellosodausers/');
   }
 
-  async removeUser(id: number) {
+  getUserByEmail(email: string) {
+    throw new Error('Method not implemented.');
+  }
+
+  async removeUser(id: string) {
     return await this.http.post('/users/delete', id);
   }
 
@@ -30,22 +35,33 @@ class APIProvider implements IDataProvider {
     return await this.http.get('/users/socialAccounts');
   }
   async login(uname: string, pass: string) {
-    return await this.http.post('/hellosodausers/login', { email: uname, password: pass }, false);
+    const response = await this.http.post('/hellosodausers/login', { email: uname, password: pass }, false);
+    if (response.data.token) {
+      AuthService.setToken(response.data.token);
+    }
+    return response;
   }
   async logout() {
     return await this.http.post('/hellosodausers/login', {});
   }
   async register(user: User) {
-    return await this.http.post('/hellosodausers/create', user, false);
+    const response = await this.http.post('/hellosodausers/create', user, false);
+    if (response.data.token) {
+      AuthService.setToken(response.data.token);
+    }
+    return response;
   }
   async getProfile() {
     return await this.http.get('/hellosodausers/');
   }
-  async createJob(data: any) {
+  async createJob(data: any, userId?: string | '') {
     return await this.http.post('/hellosodajobs/create', data);
   }
   async getJob(data: any) {
     return await this.http.get('/hellosodajobs', data);
+  }
+  createJobLog(data: any, userId?: string | '') {
+    throw new Error('Method not implemented.');
   }
   getToken() {
     throw new Error('Method not implemented.');

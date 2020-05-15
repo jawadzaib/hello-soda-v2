@@ -4,13 +4,12 @@ import ServerResponse from '../models/ServerResponse';
 import JobService from '../services/JobService';
 
 test('Get User Service', (done) => {
-  SDKManager.useProvider(SDKManager.Type.Database);
-  done();
-
+  SDKManager.useProvider(SDKManager.Type.API);
   // done();
-  // Auth.getProfile().then(response => {
+
+  // Auth.getProfile().then((response) => {
   //   if(response) {
-  //     console.log(response.getReports());
+  //     console.log(response.getCurrentReport().getLoanOutcomeScore());
   //   }
   //   done();
   // })
@@ -24,15 +23,16 @@ test('Get User Service', (done) => {
   //   console.log(response)
   //   done();
   // });
-  // Auth.login('jawad@censeo-partners.com', 'admin')
-  //   .then((response: ServerResponse) => {
-  //     if (response) {
-  //       done();
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+  Auth.login('jawad@censeo-partners.com', 'admin')
+    .then((response: ServerResponse) => {
+      console.log(response)
+      if (response) {
+        done();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   // Facebook.connect({ appId: '613018332634917', appSecret: 'a8fa8c13d4857a1713e80202ee676c30' });
   // Facebook.getLoginURL('http://www.google.com').then((response) => {
   //   console.log(response);

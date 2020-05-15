@@ -29,12 +29,17 @@ class UserService {
     return users;
   }
 
-  static async getUser(id: number) {
+  static async getUser(id: string) {
     const response = await SDKManager.dataProvider.getUser(id);
     return response.status ? new ServiceUser(response.data) : false;
   }
 
-  static async removeUser(id: number) {
+  static async getUserByEmail(email: string) {
+    const response = await SDKManager.dataProvider.getUserByEmail(email);
+    return response.status ? new ServiceUser(response.data) : false;
+  }
+
+  static async removeUser(id: string) {
     const response = await SDKManager.dataProvider.removeUser(id);
     return response;
   }

@@ -12,9 +12,6 @@ class AuthService {
   static async login(username: string, password: string) {
     try {
       const response = await SDKManager.dataProvider.login(username, password);
-      if (response.data.token) {
-        AuthService.setToken(response.data.token);
-      }
       return response;
     } catch (error) {
       throw error;
