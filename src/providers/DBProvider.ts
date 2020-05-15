@@ -84,11 +84,11 @@ class DBProvider implements IDataProvider {
         const dbTokens = job.job_object.tokens;
         const reqTokens = data.tokens;
         // traverse on db tokens & add in request which are not present
-        if(dbTokens) {
+        if (dbTokens) {
           for (const dbkey in dbTokens) {
-            if(dbTokens.hasOwnProperty(dbkey)) {
+            if (dbTokens.hasOwnProperty(dbkey)) {
               let found = false;
-              if(reqTokens) {
+              if (reqTokens) {
                 for (const reqKey in reqTokens) {
                   if (reqTokens.hasOwnProperty(reqKey) && reqKey === dbkey) {
                     found = true;
