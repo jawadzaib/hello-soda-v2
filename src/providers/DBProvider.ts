@@ -26,7 +26,7 @@ class DBProvider implements IDataProvider {
       }
       let userModel = new this.userModel(user);
       response = await userModel.save();
-      return new ServerResponse(response);
+      return new ServerResponse({status: true, data: response});
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -39,7 +39,7 @@ class DBProvider implements IDataProvider {
   async getUser(id: string) {
     try {
       let response = await this.userModel.findById(id);
-      return new ServerResponse(response);
+      return new ServerResponse({status: true, data: response});
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -48,7 +48,7 @@ class DBProvider implements IDataProvider {
   async getUserByEmail(email: string) {
     try {
       let response = await this.userModel.findOne({ email: email });
-      return new ServerResponse(response);
+      return new ServerResponse({status: true, data: response});
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -98,14 +98,14 @@ class DBProvider implements IDataProvider {
         job.job_processed = false;
         job.job_object = data;
         job.save();
-        return new ServerResponse(new JobQueue(job));
+        return new ServerResponse({status: true, data: new JobQueue(job)});
       } else {
         let jobData = { user_id: userId, job_object: data}
         let job = new this.jobModel(jobData)
         try {
           let response = await job.save()
           if(response.id) {
-            return new ServerResponse(new JobQueue(response))
+            return new ServerResponse({status: true, data: new JobQueue(response)})
           } else {
             return Promise.reject(new ServerException('Unable to process the request'));
           }
@@ -124,7 +124,7 @@ class DBProvider implements IDataProvider {
     try {
       let log = new this.jobLogModel(data)
       log.save()
-      return new ServerResponse(new JobQueueLog(log))
+      return new ServerResponse({status: true, data: new JobQueueLog(log)})
     } catch (error) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -133,7 +133,7 @@ class DBProvider implements IDataProvider {
     try {
       const job = await this.jobModel.findById(id);
       if(job.id) {
-        return new ServerResponse(new JobQueue(job))
+        return new ServerResponse({status: true, data: new JobQueue(job)})
       } else {
         return Promise.reject(new ServerException('Unable to process the request'));
       }
@@ -145,7 +145,7 @@ class DBProvider implements IDataProvider {
     try {
       const job = await this.jobModel.findOne(data);
       if(job.id) {
-        return new ServerResponse(new JobQueue(job))
+        return new ServerResponse({status: true, data: new JobQueue(job)})
       } else {
         return Promise.reject(new ServerException('Unable to process the request'));
       }
@@ -161,7 +161,7 @@ class DBProvider implements IDataProvider {
         jobsData.forEach((item: any) => {
           jobs.push(new JobQueue(item))
         })
-        return new ServerResponse(jobs)
+        return new ServerResponse({status: true, data: jobs})
       } else {
         return Promise.reject(new ServerException('Unable to process the request'));
       }

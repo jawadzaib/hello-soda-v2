@@ -1,17 +1,22 @@
-import { Facebook, SDKManager, Auth, Users } from './../index';
+import { Facebook, SDKManager, Auth, Users, Jobs } from './../index';
 import ServiceUser from '../models/ServiceUser';
 import ServerResponse from '../models/ServerResponse';
-import JobService from '../services/JobService';
 
 test('Get User Service', (done) => {
   SDKManager.useProvider(SDKManager.Type.API);
   // done();
 
-  // Auth.getProfile().then((response) => {
-  //   if(response) {
-  //     console.log(response.getCurrentReport().getLoanOutcomeScore());
+  
+
+  // Auth.getProfile().then((user) => {
+  //   if(user) {
+  //     Jobs.create('200308794873', {
+  //       facebook: '3a5751f6eff0fb4b5a160012fa13f22d'
+  //     }, user).then((response : any) => {
+  //       console.log(response);
+  //       done()
+  //     })
   //   }
-  //   done();
   // })
   // const user = new ServiceUser({
   //   firstName: 'Jawad',

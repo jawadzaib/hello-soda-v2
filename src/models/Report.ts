@@ -13,6 +13,17 @@ class Report {
   private socialConnectedness: any;
   private likelyOutcomeScore: any;
   private location: any;
+  private wordHighlights : any;
+  private topicMentions: any;
+  private topWords: any;
+  private wordCategories: any;
+  private personalAddress: any;
+  private flaggedPhrases: any;
+  private interestMentions: any;
+  private geoDetail: any;
+  private onlineActivity: any;
+  private spending: any;
+
 
   constructor(data?: any) {
     this.scores = new Array<SocialScore>();
@@ -34,6 +45,16 @@ class Report {
     this.socialConnectedness = data && data.social.connectedness ? data.social.connectedness : null;
     this.likelyOutcomeScore = data && data.scores.likely_outcome ? data.scores.likely_outcome : null;
     this.location = data && data.location ? data.location : null;
+    this.wordHighlights = data && data.activity.word_highlights ? data.activity.word_highlights : null;
+    this.topicMentions = data && data.activity.topic_mentions ? data.activity.topic_mentions : null;
+    this.topWords = data && data.activity.top_words ? data.activity.top_words : null;
+    this.wordCategories = data && data.activity.ord_categories ? data.activity.word_categories : null;
+    this.personalAddress = data && data.activity.personal_address ? data.activity.ersonal_address : null;
+    this.flaggedPhrases = data && data.activity.flagged_phrases ? data.activity.flagged_phrases : null;
+    this.interestMentions = data && data.activity.interest_mentions ? data.activity.interest_mentions : null;
+    this.geoDetail = data && data.activity.geo_detail ? data.activity.geo_detail : null;
+    this.onlineActivity = data && data.activity.online ? data.activity.online : null;
+    this.spending = data && data.activity.spending ? data.activity.spending : null;
   }
 
   getScores() {
@@ -69,6 +90,27 @@ class Report {
   }
   getLocation() {
     return this.location;
+  }
+  getWordHighlights() {
+    return this.wordHighlights
+  }
+  getTopicMentions() {
+    return this.topicMentions
+  }
+  getTopWords() {
+    return this.topWords
+  }
+  getWordCategories() {
+    return this.wordCategories
+  }
+  getPersonalAddress() {
+    return this.personalAddress
+  }
+  getFlaggedPhrases() {
+    return this.flaggedPhrases
+  }
+  getInterestMentions() {
+    return this.interestMentions
   }
 }
 

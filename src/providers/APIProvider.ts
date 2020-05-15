@@ -4,6 +4,9 @@ import { API_URL } from '../constants';
 import { config } from 'dotenv';
 import IDataProvider from '../interfaces/IDataProvider';
 import AuthService from '../services/AuthService';
+import ServerResponse from '../models/ServerResponse';
+import JobQueue from '../models/JobQueue';
+import ServerException from '../models/ServerException';
 
 class APIProvider implements IDataProvider {
   http: Http;

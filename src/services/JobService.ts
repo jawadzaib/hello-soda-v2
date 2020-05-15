@@ -4,7 +4,7 @@ import ServiceUser from '../models/ServiceUser';
 import Job from '../models/Job';
 
 class JobService {
-  create(applicationId: string, tokens: any, user: ServiceUser) {
+  static create(applicationId: string, tokens: any, user: ServiceUser) {
     try {
       const response = SDKManager.dataProvider.createQueueJob(
         {
@@ -24,7 +24,7 @@ class JobService {
     }
   }
 
-  getById(id: string) {
+  static getById(id: string) {
     try {
       const response = SDKManager.dataProvider.getQueueJobById(id);
       return (response.data) ? response.data : null
@@ -32,7 +32,7 @@ class JobService {
       throw error;
     }
   }
-  getOne(data?: any) {
+  static getOne(data?: any) {
     try {
       const response = SDKManager.dataProvider.getQueueJob(data);
       return (response.data) ? response.data : null
@@ -40,7 +40,7 @@ class JobService {
       throw error;
     }
   }
-  get(data: any) {
+  static get(data: any) {
     try {
       const response = SDKManager.dataProvider.getQueueJobs(data);
       return (response.data) ? response.data : null
