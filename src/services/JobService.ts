@@ -15,7 +15,7 @@ class JobService {
           },
           tokens,
         },
-        user.getId(),
+        user.id,
       );
       return response;
     } catch (error) {

@@ -3,16 +3,16 @@ import SDKManager from '../core/SDKManager';
 import ServiceUser from '../models/ServiceUser';
 
 class UserService {
-  static async addUser(user: ServiceUser) {
+  static async addUser(user: any) {
     try {
       const response = await SDKManager.dataProvider.addUser({
-        firstName: user.getFirstName(),
-        lastName: user.getLastName(),
-        city: user.getCity(),
-        zip: user.getZip(),
-        phone: user.getPhone(),
-        email: user.getEmail(),
-        password: user.getPassword(),
+        firstName: user.firstName,
+        lastName: user.lastName,
+        city: user.city,
+        zip: user.zip,
+        phone: user.phone,
+        email: user.email,
+        password: user.password
       });
       return response;
     } catch (error) {
