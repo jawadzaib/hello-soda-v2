@@ -12,7 +12,7 @@ class UserService {
         zip: user.zip,
         phone: user.phone,
         email: user.email,
-        password: user.password
+        password: user.password,
       });
       return response;
     } catch (error) {
