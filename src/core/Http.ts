@@ -26,7 +26,9 @@ class Http {
     }
     try {
       const response = await this.requestInstance.get(endPoint, options);
-      return (response && response.data) ? response.data as ServerResponse : new ServerResponse({status: false, data: null})
+      return response && response.data
+        ? (response.data as ServerResponse)
+        : new ServerResponse({ status: false, data: null });
     } catch (e) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
@@ -40,7 +42,9 @@ class Http {
 
     try {
       const response = await this.requestInstance.post(endPoint, data, options);
-      return (response && response.data) ? response.data as ServerResponse : new ServerResponse({status: false, data: null})
+      return response && response.data
+        ? (response.data as ServerResponse)
+        : new ServerResponse({ status: false, data: null });
     } catch (e) {
       return Promise.reject(new ServerException('Unable to process the request'));
     }
