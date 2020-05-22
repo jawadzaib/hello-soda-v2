@@ -4,7 +4,7 @@ import ServiceUser from '../models/ServiceUser';
 import Job from '../models/Job';
 
 class JobService {
-  static create(applicationId: string, tokens: any, user: ServiceUser) {
+  static create(tokens: any, user: ServiceUser) {
     try {
       const response = SDKManager.dataProvider.createQueueJob(
         {
@@ -13,7 +13,6 @@ class JobService {
             last_name: user.getLastName(),
             email: user.getEmail(),
           },
-          application_id: applicationId,
           tokens,
         },
         user.getId(),
