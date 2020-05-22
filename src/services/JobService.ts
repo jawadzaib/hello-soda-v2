@@ -4,14 +4,14 @@ import ServiceUser from '../models/ServiceUser';
 import Job from '../models/Job';
 
 class JobService {
-  static create(tokens: any, user: ServiceUser) {
+  static create(tokens: any, user: any) {
     try {
       const response = SDKManager.dataProvider.createQueueJob(
         {
           data: {
-            first_name: user.getFirstName(),
-            last_name: user.getLastName(),
-            email: user.getEmail(),
+            first_name: user.firstName,
+            last_name: user.lastName,
+            email: user.email,
           },
           tokens,
         },
