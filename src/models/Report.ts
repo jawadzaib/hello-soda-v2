@@ -163,7 +163,7 @@ class Report {
     this.spending = data && data.activity && data.activity.spending ? data.activity.spending : null;
 
     this.wordUsageAlterations = new Array();
-    this.wordUsageAlterations.push(new WordUsageAlteration({description: "Testing"}));
+    this.wordUsageAlterations.push(new WordUsageAlteration({ description: 'Testing' }));
   }
 
   getScores() {
