@@ -61,7 +61,7 @@ class Report {
     this.birthdate = new Date();
     this.psych = new Array();
     if(data && data.psych) {
-      let psych = data.psych;
+      const psych = data.psych;
       this.psych.push(new SocialScore('Openness', ((psych && psych.openness) ? parseFloat(psych.openness).toFixed(3) : 0).toString()));
       this.psych.push(new SocialScore('Conscientiousness', ((psych && psych.conscientiousness) ? parseFloat(psych.conscientiousness).toFixed(3) : 0).toString()));
       this.psych.push(new SocialScore('Extraversion', ((psych && psych.extraversion) ? parseFloat(psych.extraversion).toFixed(3) : 0).toString()));
