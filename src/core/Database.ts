@@ -43,9 +43,9 @@ class Database {
       this.jobLogModel = this.mongoose.model('JobQueueLogs', jobLogSchema);
 
       const reportQueueSchema = new this.mongoose.Schema({
-        user_id: { type: "string", required: true, unique: true },
-        job_id: { type: "object", required: true },
-        report_processed: { type: "boolean", default: false }
+        user_id: { type: 'string', required: true, unique: true },
+        job_id: { type: 'object', required: true },
+        report_processed: { type: 'boolean', default: false },
       });
       this.reportModel = this.mongoose.model('reportqueues', reportQueueSchema);
     }
@@ -64,7 +64,7 @@ class Database {
   }
 
   getReportModel() {
-    return this.reportModel
+    return this.reportModel;
   }
 }
 
