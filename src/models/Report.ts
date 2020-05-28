@@ -51,8 +51,8 @@ class Report {
     this.loanOutcomeScore = new SocialScore('Loan Outcome', '0');
     this.overallSocial = new SocialScore('Overall Social', '0');
     this.employmentScore = new SocialScore('Employment', '0');
-    this.financialAssessment = new SocialScore('Financial Assessment', '0')
-    this.legitimacy = new SocialScore('Legitimacy', '0')
+    this.financialAssessment = new SocialScore('Financial Assessment', '0');
+    this.legitimacy = new SocialScore('Legitimacy', '0');
     this.scores.push(this.loanOutcomeScore);
     this.employmentHistory = new Array();
     if (data && data.employment && data.employment.history) {
@@ -60,16 +60,53 @@ class Report {
     }
     this.birthdate = new Date();
     this.psych = new Array();
-    if(data && data.psych) {
+    if (data && data.psych) {
       const psych = data.psych;
-      this.psych.push(new SocialScore('Openness', ((psych && psych.openness) ? parseFloat(psych.openness).toFixed(3) : 0).toString()));
-      this.psych.push(new SocialScore('Conscientiousness', ((psych && psych.conscientiousness) ? parseFloat(psych.conscientiousness).toFixed(3) : 0).toString()));
-      this.psych.push(new SocialScore('Extraversion', ((psych && psych.extraversion) ? parseFloat(psych.extraversion).toFixed(3) : 0).toString()));
-      this.psych.push(new SocialScore('Agreeableness', ((psych && psych.agreeableness) ? parseFloat(psych.agreeableness).toFixed(3) : 0).toString()));
-      this.psych.push(new SocialScore('Neuroticism', ((psych && psych.neuroticism) ? parseFloat(psych.neuroticism).toFixed(3) : 0).toString()));
-      this.psych.push(new SocialScore('Deception', ((psych && psych.deception) ? parseFloat(psych.deception).toFixed(3) : 0).toString()));
-      this.psych.push(new SocialScore('Freq Swearing', ((psych && psych.freq_swearing) ? parseFloat(psych.freq_swearing).toFixed(3) : 0).toString()));
-      this.psych.push(new SocialScore('Freq Crime', ((psych && psych.freq_crime) ? parseFloat(psych.freq_crime).toFixed(3) : 0).toString()));
+      this.psych.push(
+        new SocialScore('Openness', (psych && psych.openness ? parseFloat(psych.openness).toFixed(3) : 0).toString()),
+      );
+      this.psych.push(
+        new SocialScore(
+          'Conscientiousness',
+          (psych && psych.conscientiousness ? parseFloat(psych.conscientiousness).toFixed(3) : 0).toString(),
+        ),
+      );
+      this.psych.push(
+        new SocialScore(
+          'Extraversion',
+          (psych && psych.extraversion ? parseFloat(psych.extraversion).toFixed(3) : 0).toString(),
+        ),
+      );
+      this.psych.push(
+        new SocialScore(
+          'Agreeableness',
+          (psych && psych.agreeableness ? parseFloat(psych.agreeableness).toFixed(3) : 0).toString(),
+        ),
+      );
+      this.psych.push(
+        new SocialScore(
+          'Neuroticism',
+          (psych && psych.neuroticism ? parseFloat(psych.neuroticism).toFixed(3) : 0).toString(),
+        ),
+      );
+      this.psych.push(
+        new SocialScore(
+          'Deception',
+          (psych && psych.deception ? parseFloat(psych.deception).toFixed(3) : 0).toString(),
+        ),
+      );
+      this.psych.push(
+        new SocialScore(
+          'Freq Swearing',
+          (psych && psych.freq_swearing ? parseFloat(psych.freq_swearing).toFixed(3) : 0).toString(),
+        ),
+      );
+      this.psych.push(
+        new SocialScore(
+          'Freq Crime',
+          (psych && psych.freq_crime ? parseFloat(psych.freq_crime).toFixed(3) : 0).toString(),
+        ),
+      );
     }
 
     this.socialProximity = new Array();
@@ -77,39 +114,39 @@ class Report {
     this.topicMentions = new Array();
     this.topWords = new Array();
     this.geoDetail = new Array();
-    if(data && data.social) {
-      if(data.social.proximity) {
-        data.social.proximity.forEach((item : any) => {
-          this.socialProximity.push(new SocialScore("Testing", "0%"))
-        })
+    if (data && data.social) {
+      if (data.social.proximity) {
+        data.social.proximity.forEach((item: any) => {
+          this.socialProximity.push(new SocialScore('Testing', '0%'));
+        });
       }
-      if(data.social.connectedness) {
-        this.socialConnectedness.push(new SocialScore("Facebook Friends", "0"));
-        this.socialConnectedness.push(new SocialScore("Twitter Followers", "0"));
-        this.socialConnectedness.push(new SocialScore("Twitter Following", "0"));
-        this.socialConnectedness.push(new SocialScore("Instagram Followers", "0"));
-        this.socialConnectedness.push(new SocialScore("Instagram Following", "0"));
-        this.socialConnectedness.push(new SocialScore("LinkedIn Connections", "0"));
+      if (data.social.connectedness) {
+        this.socialConnectedness.push(new SocialScore('Facebook Friends', '0'));
+        this.socialConnectedness.push(new SocialScore('Twitter Followers', '0'));
+        this.socialConnectedness.push(new SocialScore('Twitter Following', '0'));
+        this.socialConnectedness.push(new SocialScore('Instagram Followers', '0'));
+        this.socialConnectedness.push(new SocialScore('Instagram Following', '0'));
+        this.socialConnectedness.push(new SocialScore('LinkedIn Connections', '0'));
       }
     }
-    if(data && data.activity) {
-      if(data.activity.topicMentions) {
-        data.activity.topicMentions.forEach((item : any) => {
-          this.topicMentions.push(new SocialScore("Testing", "0"))
-        })
+    if (data && data.activity) {
+      if (data.activity.topicMentions) {
+        data.activity.topicMentions.forEach((item: any) => {
+          this.topicMentions.push(new SocialScore('Testing', '0'));
+        });
       }
-      if(data.activity.top_words) {
-        data.activity.top_words.forEach((item : any) => {
-          this.topWords.push(new SocialScore("Testing", "0"))
-        })
+      if (data.activity.top_words) {
+        data.activity.top_words.forEach((item: any) => {
+          this.topWords.push(new SocialScore('Testing', '0'));
+        });
       }
-      if(data.activity.geo_detail) {
+      if (data.activity.geo_detail) {
         data.activity.geo_detail.forEach((item: any) => {
           this.geoDetail.push(new Location(0, 0));
-        })
+        });
       }
     }
-    if(data && data.location) {
+    if (data && data.location) {
       this.location = new Location(0, 0);
     }
 
@@ -125,7 +162,7 @@ class Report {
     this.spending = data && data.activity && data.activity.spending ? data.activity.spending : null;
 
     this.wordUsageAlterations = new Array();
-    this.wordUsageAlterations.push({description: "Testing"});
+    this.wordUsageAlterations.push({ description: 'Testing' });
   }
 
   getScores() {
