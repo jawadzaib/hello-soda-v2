@@ -10,10 +10,10 @@ class Location {
     }
 
     getLatitude() {
-        this.latitude;
+        return this.latitude;
     }
     getLongitude() {
-        this.longitude;
+        return this.longitude;
     }
 }
 
