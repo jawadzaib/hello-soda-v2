@@ -45,7 +45,7 @@ class APIProvider implements IDataProvider {
     return response;
   }
   async logout() {
-    return await this.http.post('/hellosodausers/login', {});
+    return await this.http.post('/hellosodausers/logout', {});
   }
   async register(user: User) {
     const response = await this.http.post('/hellosodausers/create', user, false);
