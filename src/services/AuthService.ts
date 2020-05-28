@@ -9,6 +9,9 @@ class AuthService {
   static setToken(token: string) {
     sessionStorage.setItem('SOCIAL_APP_TOKEN', token);
   }
+  static removeToken() {
+    sessionStorage.removeItem('SOCIAL_APP_TOKEN');
+  }
   static async login(username: string, password: string) {
     try {
       const response = await SDKManager.dataProvider.login(username, password);
@@ -20,6 +23,7 @@ class AuthService {
   static async logout() {
     try {
       const response = await SDKManager.dataProvider.logout();
+      AuthService.removeToken();
       return response;
     } catch (error) {
       throw error;
