@@ -28,9 +28,15 @@ class Report {
     this.scores = new Array<SocialScore>();
     this.fraudScore = new SocialScore('Fraud Score', data && data.scores && data.scores.fraud ? data.scores.fraud : 0);
     this.scores.push(this.fraudScore);
-    this.overallScore = new SocialScore('Overall Score', data && data.scores && data.scores.overall ? data.scores.overall : 0);
+    this.overallScore = new SocialScore(
+      'Overall Score',
+      data && data.scores && data.scores.overall ? data.scores.overall : 0,
+    );
     this.scores.push(this.overallScore);
-    this.employabilityScore = new SocialScore('Employability', data && data.scores && data.scores.employed ? data.scores.employed : 0);
+    this.employabilityScore = new SocialScore(
+      'Employability',
+      data && data.scores && data.scores.employed ? data.scores.employed : 0,
+    );
     this.scores.push(this.employabilityScore);
     this.loanOutcomeScore = new SocialScore('Loan Outcome', '0');
     this.scores.push(this.loanOutcomeScore);
@@ -48,9 +54,11 @@ class Report {
     this.topicMentions = data && data.activity && data.activity.topic_mentions ? data.activity.topic_mentions : null;
     this.topWords = data && data.activity && data.activity.top_words ? data.activity.top_words : null;
     this.wordCategories = data && data.activity && data.activity.ord_categories ? data.activity.word_categories : null;
-    this.personalAddress = data && data.activity && data.activity.personal_address ? data.activity.ersonal_address : null;
+    this.personalAddress =
+      data && data.activity && data.activity.personal_address ? data.activity.ersonal_address : null;
     this.flaggedPhrases = data && data.activity && data.activity.flagged_phrases ? data.activity.flagged_phrases : null;
-    this.interestMentions = data && data.activity && data.activity.interest_mentions ? data.activity.interest_mentions : null;
+    this.interestMentions =
+      data && data.activity && data.activity.interest_mentions ? data.activity.interest_mentions : null;
     this.geoDetail = data && data.activity && data.activity.geo_detail ? data.activity.geo_detail : null;
     this.onlineActivity = data && data.activity && data.activity.online ? data.activity.online : null;
     this.spending = data && data.activity && data.activity.spending ? data.activity.spending : null;
