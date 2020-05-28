@@ -1,5 +1,6 @@
 import SocialScore from './SocialScore';
 import Location from './Location';
+import WordUsageAlteration from './WordUsageAlteration';
 
 class Report {
   private scores: SocialScore[];
@@ -162,7 +163,7 @@ class Report {
     this.spending = data && data.activity && data.activity.spending ? data.activity.spending : null;
 
     this.wordUsageAlterations = new Array();
-    this.wordUsageAlterations.push({ description: 'Testing' });
+    this.wordUsageAlterations.push(new WordUsageAlteration({description: "Testing"}));
   }
 
   getScores() {
