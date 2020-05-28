@@ -1,4 +1,5 @@
 import SocialScore from './SocialScore';
+import Location from './Location';
 
 class Report {
   private scores: SocialScore[];
@@ -7,7 +8,7 @@ class Report {
   private employabilityScore: SocialScore;
   private loanOutcomeScore: SocialScore;
   private employmentHistory: any[];
-  private birthday: any;
+  private birthdate: any;
   private psych: any;
   private socialProximity: any;
   private socialConnectedness: any;
@@ -23,8 +24,17 @@ class Report {
   private geoDetail: any;
   private onlineActivity: any;
   private spending: any;
+  private financialAssessment: any;
+  private legitimacy: any;
+  private accountFriends: any;
+  private accountAge: any;
+  private overallSocial: any;
+  private wordUsageAlterations: any;
+  private employmentScore: any;
 
   constructor(data?: any) {
+    this.accountFriends = 0;
+    this.accountAge = 0;
     this.scores = new Array<SocialScore>();
     this.fraudScore = new SocialScore('Fraud Score', data && data.scores && data.scores.fraud ? data.scores.fraud : 0);
     this.scores.push(this.fraudScore);
@@ -39,29 +49,83 @@ class Report {
     );
     this.scores.push(this.employabilityScore);
     this.loanOutcomeScore = new SocialScore('Loan Outcome', '0');
+    this.overallSocial = new SocialScore('Overall Social', '0');
+    this.employmentScore = new SocialScore('Employment', '0');
+    this.financialAssessment = new SocialScore('Financial Assessment', '0')
+    this.legitimacy = new SocialScore('Legitimacy', '0')
     this.scores.push(this.loanOutcomeScore);
     this.employmentHistory = new Array();
     if (data && data.employment && data.employment.history) {
       this.employmentHistory = data.employment.history;
     }
-    this.birthday = data && data.birthday ? data.birthday : null;
-    this.psych = data && data.psych ? data.psych : null;
-    this.socialProximity = data && data.social && data.social.proximity ? data.social.proximity : null;
-    this.socialConnectedness = data && data.social && data.social.connectedness ? data.social.connectedness : null;
+    this.birthdate = new Date();
+    this.psych = new Array();
+    if(data && data.psych) {
+      let psych = data.psych;
+      this.psych.push(new SocialScore('Openness', ((psych && psych.openness) ? parseFloat(psych.openness).toFixed(3) : 0).toString()));
+      this.psych.push(new SocialScore('Conscientiousness', ((psych && psych.conscientiousness) ? parseFloat(psych.conscientiousness).toFixed(3) : 0).toString()));
+      this.psych.push(new SocialScore('Extraversion', ((psych && psych.extraversion) ? parseFloat(psych.extraversion).toFixed(3) : 0).toString()));
+      this.psych.push(new SocialScore('Agreeableness', ((psych && psych.agreeableness) ? parseFloat(psych.agreeableness).toFixed(3) : 0).toString()));
+      this.psych.push(new SocialScore('Neuroticism', ((psych && psych.neuroticism) ? parseFloat(psych.neuroticism).toFixed(3) : 0).toString()));
+      this.psych.push(new SocialScore('Deception', ((psych && psych.deception) ? parseFloat(psych.deception).toFixed(3) : 0).toString()));
+      this.psych.push(new SocialScore('Freq Swearing', ((psych && psych.freq_swearing) ? parseFloat(psych.freq_swearing).toFixed(3) : 0).toString()));
+      this.psych.push(new SocialScore('Freq Crime', ((psych && psych.freq_crime) ? parseFloat(psych.freq_crime).toFixed(3) : 0).toString()));
+    }
+
+    this.socialProximity = new Array();
+    this.socialConnectedness = new Array();
+    this.topicMentions = new Array();
+    this.topWords = new Array();
+    this.geoDetail = new Array();
+    if(data && data.social) {
+      if(data.social.proximity) {
+        data.social.proximity.forEach((item : any) => {
+          this.socialProximity.push(new SocialScore("Testing", "0%"))
+        })
+      }
+      if(data.social.connectedness) {
+        this.socialConnectedness.push(new SocialScore("Facebook Friends", "0"));
+        this.socialConnectedness.push(new SocialScore("Twitter Followers", "0"));
+        this.socialConnectedness.push(new SocialScore("Twitter Following", "0"));
+        this.socialConnectedness.push(new SocialScore("Instagram Followers", "0"));
+        this.socialConnectedness.push(new SocialScore("Instagram Following", "0"));
+        this.socialConnectedness.push(new SocialScore("LinkedIn Connections", "0"));
+      }
+    }
+    if(data && data.activity) {
+      if(data.activity.topicMentions) {
+        data.activity.topicMentions.forEach((item : any) => {
+          this.topicMentions.push(new SocialScore("Testing", "0"))
+        })
+      }
+      if(data.activity.top_words) {
+        data.activity.top_words.forEach((item : any) => {
+          this.topWords.push(new SocialScore("Testing", "0"))
+        })
+      }
+      if(data.activity.geo_detail) {
+        data.activity.geo_detail.forEach((item: any) => {
+          this.geoDetail.push(new Location(0, 0));
+        })
+      }
+    }
+    if(data && data.location) {
+      this.location = new Location(0, 0);
+    }
+
     this.likelyOutcomeScore = data && data.scores && data.scores.likely_outcome ? data.scores.likely_outcome : null;
-    this.location = data && data.location ? data.location : null;
     this.wordHighlights = data && data.activity && data.activity.word_highlights ? data.activity.word_highlights : null;
-    this.topicMentions = data && data.activity && data.activity.topic_mentions ? data.activity.topic_mentions : null;
-    this.topWords = data && data.activity && data.activity.top_words ? data.activity.top_words : null;
     this.wordCategories = data && data.activity && data.activity.ord_categories ? data.activity.word_categories : null;
     this.personalAddress =
       data && data.activity && data.activity.personal_address ? data.activity.ersonal_address : null;
     this.flaggedPhrases = data && data.activity && data.activity.flagged_phrases ? data.activity.flagged_phrases : null;
     this.interestMentions =
       data && data.activity && data.activity.interest_mentions ? data.activity.interest_mentions : null;
-    this.geoDetail = data && data.activity && data.activity.geo_detail ? data.activity.geo_detail : null;
     this.onlineActivity = data && data.activity && data.activity.online ? data.activity.online : null;
     this.spending = data && data.activity && data.activity.spending ? data.activity.spending : null;
+
+    this.wordUsageAlterations = new Array();
+    this.wordUsageAlterations.push({description: "Testing"});
   }
 
   getScores() {
@@ -80,8 +144,8 @@ class Report {
   getLoanOutcomeScore() {
     return this.loanOutcomeScore;
   }
-  getBirthday() {
-    return this.birthday;
+  getBirthdate() {
+    return this.birthdate;
   }
   getPsych() {
     return this.psych;
@@ -118,6 +182,36 @@ class Report {
   }
   getInterestMentions() {
     return this.interestMentions;
+  }
+  getFinancialAssessment() {
+    return this.financialAssessment;
+  }
+  getLegitimacy() {
+    return this.legitimacy;
+  }
+  getAccountFriends() {
+    return this.accountFriends;
+  }
+  getAccountAge() {
+    return this.accountAge;
+  }
+  getOnlineActivity() {
+    return this.onlineActivity;
+  }
+  getSpending() {
+    return this.spending;
+  }
+  getEmploymentHistory() {
+    return this.employmentHistory;
+  }
+  getOverallSocial() {
+    return this.overallSocial;
+  }
+  getWordUsageAlterations() {
+    return this.wordUsageAlterations;
+  }
+  getEmploymentScore() {
+    return this.employmentScore;
   }
 }
 
