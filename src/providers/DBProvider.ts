@@ -14,6 +14,7 @@ class DBProvider implements IDataProvider {
     SDKManager.UserModel = this.database.getUserModel();
     SDKManager.JobQueueModel = this.database.getJobModel();
     SDKManager.JobQueueLogModel = this.database.getJobLogModel();
+    SDKManager.ReportQueueModel = this.database.getReportModel();
   }
 
   async addUser(user: User) {

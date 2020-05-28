@@ -3,6 +3,7 @@ class Database {
   private userModel: any;
   private jobModel: any;
   private jobLogModel: any;
+  private reportModel: any;
   constructor(mongoose?: any, validator?: any) {
     if (mongoose && validator) {
       this.mongoose = mongoose;
@@ -40,6 +41,13 @@ class Database {
         createdDate: { type: Date, default: Date.now },
       });
       this.jobLogModel = this.mongoose.model('JobQueueLogs', jobLogSchema);
+
+      const reportQueueSchema = new this.mongoose.Schema({
+        user_id: { type: "string", required: true, unique: true },
+        job_id: { type: "object", required: true },
+        report_processed: { type: "boolean", default: false }
+      });
+      this.reportModel = this.mongoose.model('reportqueues', reportQueueSchema);
     }
   }
 
@@ -53,6 +61,10 @@ class Database {
 
   getJobLogModel() {
     return this.jobLogModel;
+  }
+
+  getReportModel() {
+    return this.reportModel
   }
 }
 

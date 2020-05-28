@@ -8,6 +8,7 @@ class SDKManager {
   static UserModel: any;
   static JobQueueModel: any;
   static JobQueueLogModel: any;
+  static ReportQueueModel: any;
 
   static useProvider(providerName: number, mongoose?: any, validator?: any) {
     let provider = null;
