@@ -14,12 +14,12 @@ class ServiceUser extends User {
     this.jobs = data && data.jobs ? data.jobs : new Array();
     this.accounts = data && data.accounts ? data.accounts : new Array();
     this.reports = new Array<Report>();
-    if (data && data.reports) {
-      data.reports.forEach((item: any) => {
-        this.reports.push(new Report(item));
-      });
-    }
-    this.currentReport = this.reports ? this.reports[this.reports.length - 1] : new Report();
+    // if (data && data.reports) {
+    //   data.reports.forEach((item: any) => {
+    //     this.reports.push(new Report(item));
+    //   });
+    // }
+    this.currentReport = (data && data.reports) ? new Report(data.reports[data.reports.length - 1]) : new Report();
   }
 
   getJobs() {

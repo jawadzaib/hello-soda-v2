@@ -4,13 +4,13 @@ import ServiceUser from '../models/ServiceUser';
 
 class AuthService {
   static getToken() {
-    return sessionStorage.getItem('SOCIAL_APP_TOKEN');
+    return localStorage.getItem('SOCIAL_APP_TOKEN');
   }
   static setToken(token: string) {
-    sessionStorage.setItem('SOCIAL_APP_TOKEN', token);
+    localStorage.setItem('SOCIAL_APP_TOKEN', token);
   }
   static removeToken() {
-    sessionStorage.removeItem('SOCIAL_APP_TOKEN');
+    localStorage.removeItem('SOCIAL_APP_TOKEN');
   }
   static async login(username: string, password: string) {
     try {

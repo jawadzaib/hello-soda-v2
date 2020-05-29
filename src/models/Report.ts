@@ -1,6 +1,7 @@
 import SocialScore from './SocialScore';
 import Location from './Location';
 import WordUsageAlteration from './WordUsageAlteration';
+import DateTimeUtil from '../utils/DateTimeUtil';
 
 class Report {
   private scores: SocialScore[];
@@ -61,73 +62,73 @@ class Report {
     }
     this.birthdate = new Date();
     this.psych = new Array();
-    if (data && data.psych) {
-      const psych = data.psych;
-      this.psych.push(
-        new SocialScore('Openness', (psych && psych.openness ? parseFloat(psych.openness).toFixed(3) : 0).toString()),
-      );
-      this.psych.push(
-        new SocialScore(
-          'Conscientiousness',
-          (psych && psych.conscientiousness ? parseFloat(psych.conscientiousness).toFixed(3) : 0).toString(),
-        ),
-      );
-      this.psych.push(
-        new SocialScore(
-          'Extraversion',
-          (psych && psych.extraversion ? parseFloat(psych.extraversion).toFixed(3) : 0).toString(),
-        ),
-      );
-      this.psych.push(
-        new SocialScore(
-          'Agreeableness',
-          (psych && psych.agreeableness ? parseFloat(psych.agreeableness).toFixed(3) : 0).toString(),
-        ),
-      );
-      this.psych.push(
-        new SocialScore(
-          'Neuroticism',
-          (psych && psych.neuroticism ? parseFloat(psych.neuroticism).toFixed(3) : 0).toString(),
-        ),
-      );
-      this.psych.push(
-        new SocialScore(
-          'Deception',
-          (psych && psych.deception ? parseFloat(psych.deception).toFixed(3) : 0).toString(),
-        ),
-      );
-      this.psych.push(
-        new SocialScore(
-          'Freq Swearing',
-          (psych && psych.freq_swearing ? parseFloat(psych.freq_swearing).toFixed(3) : 0).toString(),
-        ),
-      );
-      this.psych.push(
-        new SocialScore(
-          'Freq Crime',
-          (psych && psych.freq_crime ? parseFloat(psych.freq_crime).toFixed(3) : 0).toString(),
-        ),
-      );
-    }
+    const psych = (data && data.psych) ? data.psych : null;
+    this.psych.push(
+      new SocialScore('Openness', (psych && psych.openness ? parseFloat(psych.openness).toFixed(3) : 0).toString()),
+    );
+    this.psych.push(
+      new SocialScore(
+        'Conscientiousness',
+        (psych && psych.conscientiousness ? parseFloat(psych.conscientiousness).toFixed(3) : 0).toString(),
+      ),
+    );
+    this.psych.push(
+      new SocialScore(
+        'Extraversion',
+        (psych && psych.extraversion ? parseFloat(psych.extraversion).toFixed(3) : 0).toString(),
+      ),
+    );
+    this.psych.push(
+      new SocialScore(
+        'Agreeableness',
+        (psych && psych.agreeableness ? parseFloat(psych.agreeableness).toFixed(3) : 0).toString(),
+      ),
+    );
+    this.psych.push(
+      new SocialScore(
+        'Neuroticism',
+        (psych && psych.neuroticism ? parseFloat(psych.neuroticism).toFixed(3) : 0).toString(),
+      ),
+    );
+    this.psych.push(
+      new SocialScore(
+        'Deception',
+        (psych && psych.deception ? parseFloat(psych.deception).toFixed(3) : 0).toString(),
+      ),
+    );
+    this.psych.push(
+      new SocialScore(
+        'Freq Swearing',
+        (psych && psych.freq_swearing ? parseFloat(psych.freq_swearing).toFixed(3) : 0).toString(),
+      ),
+    );
+    this.psych.push(
+      new SocialScore(
+        'Freq Crime',
+        (psych && psych.freq_crime ? parseFloat(psych.freq_crime).toFixed(3) : 0).toString(),
+      ),
+    );
 
     this.socialProximity = new Array();
     this.socialConnectedness = new Array();
     this.topicMentions = new Array();
     this.topWords = new Array();
     this.geoDetail = new Array();
+
+    // Social Connectedness
+    this.socialConnectedness.push(new SocialScore('Facebook Friends', '0'));
+    this.socialConnectedness.push(new SocialScore('Twitter Followers', '0'));
+    this.socialConnectedness.push(new SocialScore('Twitter Following', '0'));
+    this.socialConnectedness.push(new SocialScore('Instagram Followers', '0'));
+    this.socialConnectedness.push(new SocialScore('Instagram Following', '0'));
+    this.socialConnectedness.push(new SocialScore('LinkedIn Connections', '0'));
+
+
     if (data && data.social) {
       if (data.social.proximity) {
         data.social.proximity.forEach((item: any) => {
           this.socialProximity.push(new SocialScore('Testing', '0%'));
         });
-      }
-      if (data.social.connectedness) {
-        this.socialConnectedness.push(new SocialScore('Facebook Friends', '0'));
-        this.socialConnectedness.push(new SocialScore('Twitter Followers', '0'));
-        this.socialConnectedness.push(new SocialScore('Twitter Following', '0'));
-        this.socialConnectedness.push(new SocialScore('Instagram Followers', '0'));
-        this.socialConnectedness.push(new SocialScore('Instagram Following', '0'));
-        this.socialConnectedness.push(new SocialScore('LinkedIn Connections', '0'));
       }
     }
     if (data && data.activity) {
@@ -143,13 +144,12 @@ class Report {
       }
       if (data.activity.geo_detail) {
         data.activity.geo_detail.forEach((item: any) => {
-          this.geoDetail.push(new Location(0, 0));
+          this.geoDetail.push([0, 0]);
         });
       }
     }
-    if (data && data.location) {
-      this.location = new Location(0, 0);
-    }
+    // Location
+    this.location = new Location(0, 0);
 
     this.likelyOutcomeScore = data && data.scores && data.scores.likely_outcome ? data.scores.likely_outcome : null;
     this.wordHighlights = data && data.activity && data.activity.word_highlights ? data.activity.word_highlights : null;
@@ -160,7 +160,19 @@ class Report {
     this.interestMentions =
       data && data.activity && data.activity.interest_mentions ? data.activity.interest_mentions : null;
     this.onlineActivity = data && data.activity && data.activity.online ? data.activity.online : null;
-    this.spending = data && data.activity && data.activity.spending ? data.activity.spending : null;
+
+
+    this.spending = {labels: [], data: []}
+    const monthlyDetail = (data && data.activity && data.activity.spending && data.activity.spending.monthly_detail) ? data.activity.spending.monthly_detail : [];
+    let currentDate = DateTimeUtil.getMonthStartDate();
+    const lastDate = DateTimeUtil.getMonthLastDate();
+    while(currentDate.getTime() <= lastDate.getTime()) {
+      const currentDay = parseInt(currentDate.getDate().toString());
+      this.spending.labels.push(currentDate.toDateString());
+      this.spending.data.push((monthlyDetail[currentDay-1]) ? parseFloat(monthlyDetail[currentDay-1]) : 0);
+
+      currentDate = DateTimeUtil.addDays(currentDate, 5);
+    }
 
     this.wordUsageAlterations = new Array();
     this.wordUsageAlterations.push(new WordUsageAlteration({ description: 'Testing' }));
