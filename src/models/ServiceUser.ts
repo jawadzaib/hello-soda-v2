@@ -19,7 +19,7 @@ class ServiceUser extends User {
     //     this.reports.push(new Report(item));
     //   });
     // }
-    this.currentReport = (data && data.reports) ? new Report(data.reports[data.reports.length - 1]) : new Report();
+    this.currentReport = data && data.reports ? new Report(data.reports[data.reports.length - 1]) : new Report();
   }
 
   getJobs() {

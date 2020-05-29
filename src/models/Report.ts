@@ -62,7 +62,7 @@ class Report {
     }
     this.birthdate = new Date();
     this.psych = new Array();
-    const psych = (data && data.psych) ? data.psych : null;
+    const psych = data && data.psych ? data.psych : null;
     this.psych.push(
       new SocialScore('Openness', (psych && psych.openness ? parseFloat(psych.openness).toFixed(3) : 0).toString()),
     );
@@ -91,10 +91,7 @@ class Report {
       ),
     );
     this.psych.push(
-      new SocialScore(
-        'Deception',
-        (psych && psych.deception ? parseFloat(psych.deception).toFixed(3) : 0).toString(),
-      ),
+      new SocialScore('Deception', (psych && psych.deception ? parseFloat(psych.deception).toFixed(3) : 0).toString()),
     );
     this.psych.push(
       new SocialScore(
@@ -122,7 +119,6 @@ class Report {
     this.socialConnectedness.push(new SocialScore('Instagram Followers', '0'));
     this.socialConnectedness.push(new SocialScore('Instagram Following', '0'));
     this.socialConnectedness.push(new SocialScore('LinkedIn Connections', '0'));
-
 
     if (data && data.social) {
       if (data.social.proximity) {
@@ -161,15 +157,17 @@ class Report {
       data && data.activity && data.activity.interest_mentions ? data.activity.interest_mentions : null;
     this.onlineActivity = data && data.activity && data.activity.online ? data.activity.online : null;
 
-
-    this.spending = {labels: [], data: []}
-    const monthlyDetail = (data && data.activity && data.activity.spending && data.activity.spending.monthly_detail) ? data.activity.spending.monthly_detail : [];
+    this.spending = { labels: [], data: [] };
+    const monthlyDetail =
+      data && data.activity && data.activity.spending && data.activity.spending.monthly_detail
+        ? data.activity.spending.monthly_detail
+        : [];
     let currentDate = DateTimeUtil.getMonthStartDate();
     const lastDate = DateTimeUtil.getMonthLastDate();
-    while(currentDate.getTime() <= lastDate.getTime()) {
+    while (currentDate.getTime() <= lastDate.getTime()) {
       const currentDay = parseInt(currentDate.getDate().toString(), 10);
       this.spending.labels.push(currentDate.toDateString());
-      this.spending.data.push((monthlyDetail[currentDay-1]) ? parseFloat(monthlyDetail[currentDay-1]) : 0);
+      this.spending.data.push(monthlyDetail[currentDay - 1] ? parseFloat(monthlyDetail[currentDay - 1]) : 0);
 
       currentDate = DateTimeUtil.addDays(currentDate, 5);
     }

@@ -4,29 +4,31 @@ test('Get User Service', (done) => {
   SDKManager.useProvider(SDKManager.Type.API);
   // done();
   Auth.login('haji.babar@gmail.com', 'ali123')
-  .then((response: any) => {
-    if (response) {
-      Auth.getProfile().then((user) => {
-        done();
-        // if (user) {
-        //   Jobs.create(
-        //     {
-        //       facebook: '3a5751f6eff0fb4b5a160012fa13f22d',
-        //     },
-        //     user,
-        //   ).then((response: any) => {
-        //     console.log(response);
-        //     done();
-        //   });
-        // }
-      }).catch(error => {
-        console.log(error)
-      });
-    }
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+    .then((response: any) => {
+      if (response) {
+        Auth.getProfile()
+          .then((user) => {
+            done();
+            // if (user) {
+            //   Jobs.create(
+            //     {
+            //       facebook: '3a5751f6eff0fb4b5a160012fa13f22d',
+            //     },
+            //     user,
+            //   ).then((response: any) => {
+            //     console.log(response);
+            //     done();
+            //   });
+            // }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   // Auth.getProfile().then((user) => {
   //   if (user) {
