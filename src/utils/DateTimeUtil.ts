@@ -7,7 +7,7 @@ class DateTimeUtil {
         return new Date(date.getFullYear(), date.getMonth() + 1, 0);
     }
     static addDays(date: Date = new Date(), days: number = 0) {
-        let newDate = new Date(date.valueOf());
+        const newDate = new Date(date.valueOf());
         newDate.setDate(newDate.getDate() + days);
         return newDate;
     }

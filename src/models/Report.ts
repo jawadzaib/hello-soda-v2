@@ -167,7 +167,7 @@ class Report {
     let currentDate = DateTimeUtil.getMonthStartDate();
     const lastDate = DateTimeUtil.getMonthLastDate();
     while(currentDate.getTime() <= lastDate.getTime()) {
-      const currentDay = parseInt(currentDate.getDate().toString());
+      const currentDay = parseInt(currentDate.getDate().toString(), 10);
       this.spending.labels.push(currentDate.toDateString());
       this.spending.data.push((monthlyDetail[currentDay-1]) ? parseFloat(monthlyDetail[currentDay-1]) : 0);
 
