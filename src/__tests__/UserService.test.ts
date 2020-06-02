@@ -9,13 +9,14 @@ test('Get User Service', (done) => {
         Auth.getProfile()
           .then((user) => {
             if (user) {
-              Auth.updateProfile(user).then(res => {
-                console.log(res);
-                done();
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+              Auth.updateProfile(user)
+                .then((res) => {
+                  console.log(res);
+                  done();
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             }
           })
           .catch((error) => {

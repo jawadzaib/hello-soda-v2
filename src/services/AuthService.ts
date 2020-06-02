@@ -52,7 +52,7 @@ class AuthService {
       const response = await SDKManager.dataProvider.updateProfile({
         firstName: user.firstName,
         lastName: user.lastName,
-        password: user.password
+        password: user.password,
       });
       return response;
     } catch (error) {
