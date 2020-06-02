@@ -73,6 +73,9 @@ class DBProvider implements IDataProvider {
   getProfile() {
     throw new Error('Method not implemented.');
   }
+  updateProfile(user: any) {
+    throw new Error("Method not implemented.");
+  }
   getToken() {
     throw new Error('Method not implemented.');
   }

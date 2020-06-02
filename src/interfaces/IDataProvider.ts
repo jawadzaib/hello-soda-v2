@@ -6,6 +6,7 @@ interface IDataProvider {
   logout(): any;
   register(user: User): any;
   getProfile(): any;
+  updateProfile(user: any): any;
   getToken(): any;
   addUser(user: User): any;
   getUsers(): any;

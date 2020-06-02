@@ -8,18 +8,15 @@ test('Get User Service', (done) => {
       if (response) {
         Auth.getProfile()
           .then((user) => {
-            done();
-            // if (user) {
-            //   Jobs.create(
-            //     {
-            //       facebook: '3a5751f6eff0fb4b5a160012fa13f22d',
-            //     },
-            //     user,
-            //   ).then((response: any) => {
-            //     console.log(response);
-            //     done();
-            //   });
-            // }
+            if (user) {
+              Auth.updateProfile(user).then(res => {
+                console.log(res);
+                done();
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            }
           })
           .catch((error) => {
             console.log(error);

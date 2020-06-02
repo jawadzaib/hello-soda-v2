@@ -116,8 +116,6 @@ class Report {
     this.socialConnectedness.push(new SocialScore('Facebook Friends', '0'));
     this.socialConnectedness.push(new SocialScore('Twitter Followers', '0'));
     this.socialConnectedness.push(new SocialScore('Twitter Following', '0'));
-    this.socialConnectedness.push(new SocialScore('Instagram Followers', '0'));
-    this.socialConnectedness.push(new SocialScore('Instagram Following', '0'));
     this.socialConnectedness.push(new SocialScore('LinkedIn Connections', '0'));
 
     if (data && data.social) {
@@ -166,7 +164,7 @@ class Report {
     const lastDate = DateTimeUtil.getMonthLastDate();
     while (currentDate.getTime() <= lastDate.getTime()) {
       const currentDay = parseInt(currentDate.getDate().toString(), 10);
-      this.spending.labels.push(currentDate.toDateString());
+      this.spending.labels.push(currentDate.toLocaleDateString());
       this.spending.data.push(monthlyDetail[currentDay - 1] ? parseFloat(monthlyDetail[currentDay - 1]) : 0);
 
       currentDate = DateTimeUtil.addDays(currentDate, 5);

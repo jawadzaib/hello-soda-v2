@@ -46,6 +46,19 @@ class AuthService {
       throw error;
     }
   }
+
+  static async updateProfile(user: any) {
+    try {
+      const response = await SDKManager.dataProvider.updateProfile({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        password: user.password
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default AuthService;

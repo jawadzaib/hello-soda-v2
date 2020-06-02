@@ -57,6 +57,9 @@ class APIProvider implements IDataProvider {
   async getProfile() {
     return await this.http.get('/hellosodausers/');
   }
+  async updateProfile(user: any) {
+    return await this.http.post('/hellosodausers/update', user);
+  }
   async createQueueJob(data: any, userId?: string | '') {
     return await this.http.post('/hellosodajobs/create', data);
   }
