@@ -10,6 +10,7 @@ abstract class User {
   protected phone: string;
   protected email: string;
   protected password: string;
+  protected birthdate: string;
   constructor(data?: any) {
     this.id = data && data.id ? data.id : '';
     this.firstName = data && data.firstName ? data.firstName : '';
@@ -22,6 +23,7 @@ abstract class User {
     this.phone = data && data.phone ? data.phone : '';
     this.email = data && data.email ? data.email : '';
     this.password = data && data.password ? data.password : '';
+    this.birthdate = data && data.birthdate ? data.birthdate : '';
   }
 
   getAddress1() {
@@ -56,6 +58,9 @@ abstract class User {
   }
   getPassword() {
     return this.password;
+  }
+  getBirthdate() {
+    return this.birthdate;
   }
 }
 
