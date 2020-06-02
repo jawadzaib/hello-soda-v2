@@ -48,12 +48,12 @@ class AuthService {
   }
 
   static async updateProfile(user: any) {
-    const userPayload : any = {
+    const userPayload: any = {
       firstName: user.firstName,
       lastName: user.lastName,
-      birthdate: user.birthdate
+      birthdate: user.birthdate,
     };
-    if(user.password) {
+    if (user.password) {
       userPayload.password = user.password;
     }
     try {
