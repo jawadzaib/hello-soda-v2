@@ -48,12 +48,16 @@ class AuthService {
   }
 
   static async updateProfile(user: any) {
+    const userPayload : any = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      birthdate: user.birthdate
+    };
+    if(user.password) {
+      userPayload.password = user.password;
+    }
     try {
-      const response = await SDKManager.dataProvider.updateProfile({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        password: user.password,
-      });
+      const response = await SDKManager.dataProvider.updateProfile(userPayload);
       return response;
     } catch (error) {
       throw error;

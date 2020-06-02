@@ -20,6 +20,7 @@ class Database {
               return validator.isEmail(value);
             },
           },
+          birthdate: { type: 'string', required: false},
           password: { type: 'string', required: true },
           reports: { type: 'array', default: [] },
           createdDate: { type: Date, default: Date.now },
