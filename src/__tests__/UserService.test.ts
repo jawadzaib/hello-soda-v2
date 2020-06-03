@@ -8,7 +8,7 @@ test('Get User Service', (done) => {
       if (response) {
         Auth.getProfile()
           .then((user) => {
-            console.log(user)
+            console.log(user);
             done();
             // if (user) {
             //   Auth.updateProfile(user)
