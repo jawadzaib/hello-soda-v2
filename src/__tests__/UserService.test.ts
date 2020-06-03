@@ -2,31 +2,33 @@ import { Facebook, SDKManager, Auth, Users, Jobs } from './../index';
 
 test('Get User Service', (done) => {
   SDKManager.useProvider(SDKManager.Type.API);
-  done();
-  // Auth.login('haji.babar@gmail.com', 'ali123')
-  //   .then((response: any) => {
-  //     if (response) {
-  //       Auth.getProfile()
-  //         .then((user) => {
-  //           if (user) {
-  //             Auth.updateProfile(user)
-  //               .then((res) => {
-  //                 console.log(res);
-  //                 done();
-  //               })
-  //               .catch((error) => {
-  //                 console.log(error);
-  //               });
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+  // done();
+  Auth.login('nawaz.sharif@gmail.com', 'ali123')
+    .then((response: any) => {
+      if (response) {
+        Auth.getProfile()
+          .then((user) => {
+            console.log(user)
+            done();
+            // if (user) {
+            //   Auth.updateProfile(user)
+            //     .then((res) => {
+            //       console.log(res);
+            //       done();
+            //     })
+            //     .catch((error) => {
+            //       console.log(error);
+            //     });
+            // }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   // Auth.getProfile().then((user) => {
   //   if (user) {
