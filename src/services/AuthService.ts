@@ -53,12 +53,12 @@ class AuthService {
       lastName: user.lastName,
       birthdate: user.birthdate,
     };
-    if (user.password) {
+    if (user.password && user.password.length > 0) {
       userPayload.password = user.password;
     }
     try {
       const response = await SDKManager.dataProvider.updateProfile(userPayload);
-      if (user.password.length > 0) {
+      if (user.password && user.password.length > 0) {
         AuthService.removeToken();
       }
       return response;
