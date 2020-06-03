@@ -58,7 +58,7 @@ class AuthService {
     }
     try {
       const response = await SDKManager.dataProvider.updateProfile(userPayload);
-      if(user.password.length > 0) {
+      if (user.password.length > 0) {
         AuthService.removeToken();
       }
       return response;
